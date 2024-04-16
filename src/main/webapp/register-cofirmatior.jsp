@@ -17,6 +17,7 @@
 <head>
 <meta charset="UTF-8">
 <title>新規登録確認画面</title>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/style.css">
 </head>
 <body>
 <h1>登録内容確認</h1>
