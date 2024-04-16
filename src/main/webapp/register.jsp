@@ -6,7 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>新規登録</title>
+<!-- 郵便番号から住所自動入力のために必要 -->
+ <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
 <script>
 	//パスワードとパスワード確認の値が一致しない場合にエラーメッセージを表示。
 	//onkeyupイベントでpass_confirmationと関連付け。入力の度にエラーがあれば表示される動作。
@@ -39,23 +41,24 @@
 </script>
 </head>
 <body>
- <form action="AccountRegister" method="post">
+     <form class="h-adr" action="AccountRegister" method="post">
     <h1>新規登録</h1>
     <p>お名前</p>
 	<input type="text" id="name" name="name" required>
-    <p>パスワード</p>
+    <p>パスワード（４文字以上）</p>
 	<input type="password" name="pass" id="pass"  autocomplete="off" minlength="4" required>
-	<p>パスワード確認</p>
+	<p>パスワード確認（４文字以上）</p>
 	<input type="password" name="pass_confirmation" id="pass_confirmation" autocomplete="off" minlength="4" required onkeyup="checkPasswordMatch()">
 	<p id="confirmMessage"></p>
-    <p>郵便番号</p>
-    <input type="number" name=""  pattern="[0-9]{3}[0-9]{4}" placeholder="000-0000">
+    <p>郵便番号（ハイフンなし半角記入）</p>
+    <input type="hidden" class="p-country-name" value="Japan">
+    <input type="text" name=""  class="p-postal-code" size="8" maxlength="8" placeholder="0001111">
     <p>住所</p>
-    <input type="text" name="">
+    <input type="text" name="" class="p-region p-locality p-street-address p-extended-address">
     <p>生年月日</p>
     <input type="date">
-    <p>電話番号</p>
-    <input type="tel" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}">
+    <p>電話番号（ハイフンなしで半角記入）</p>
+    <input type="tel" pattern="[0-9]{11}" placeholder="01012345678">
     <p>どうやってサイトを知ったか</p>
     <label><input type="checkbox" name="check">りんご</label>
     <p>DM有無</p>
