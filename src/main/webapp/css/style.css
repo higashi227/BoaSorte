@@ -1,0 +1,87 @@
+
+.coffee {
+        font-family: "Monomaniac One", "Mochiy Pop P One", sans-serif;
+        font-size: large;
+        font-weight: 400;
+        font-style: normal;
+}
+
+
+nav{
+    background:#333;
+    color:#fff;
+    text-align: center;
+  }
+  /* ナビゲーション横並びに */
+  nav ul{
+    list-style: none;
+    display: flex;
+    /* justify-content: center; */
+    justify-content: space-around;
+  }
+
+  /*ナビゲーションのリンク設定*/
+nav ul li a{
+    display: block;
+    text-decoration: none;
+    color: #999;
+    padding:20px 35px;
+    transition:all .3s;
+  }
+  nav ul li li a{
+    padding:10px 35px;
+  }
+  nav ul li a:hover{
+    color:#fff;
+    background-color: #888888;
+    font-weight: bold;
+  }
+
+  /* ヘッダー */
+header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .header_wrapper{
+    max-width: 1320px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header_wrapper h1{
+    width: auto;
+    display: flex;
+    align-items: center;
+    color: #333333;
+    font-size: 34px;
+  }
+  
+  .header_wrapper h1 span{
+    display: block;
+    padding: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #ffffff;
+  }
+
+  .logo {
+    padding: 1rem 3rem;
+    -webkit-transform: skew(-15deg);
+    transform: skew(-15deg);
+    background-image: -webkit-gradient(linear, left top, right top, from(#209cff), to(#68e0cf));
+    background-image: -webkit-linear-gradient(left, #209cff 0%, #68e0cf 100%);
+    background-image: linear-gradient(to right, #209cff 0%, #68e0cf 100%);
+  }
+.loginlogo {
+  margin: auto 10px;
+}
+
+ img {
+    width: 100vw;
+ } 
+
+ 
