@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>新規登録</title>
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/style.css">
 <!-- 郵便番号から住所自動入力のために必要 -->
  <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
 <script>
@@ -41,30 +42,39 @@
 </script>
 </head>
 <body>
-     <form class="h-adr" action="AccountRegister" method="post">
-    <h1>新規登録</h1>
-    <p>お名前</p>
-	<input type="text" id="name" name="name" required>
-    <p>パスワード（４文字以上）</p>
-	<input type="password" name="pass" id="pass"  autocomplete="off" minlength="4" required>
-	<p>パスワード確認（４文字以上）</p>
-	<input type="password" name="pass_confirmation" id="pass_confirmation" autocomplete="off" minlength="4" required onkeyup="checkPasswordMatch()">
-	<p id="confirmMessage"></p>
-    <p>郵便番号（ハイフンなし半角記入）</p>
-    <input type="hidden" class="p-country-name" value="Japan">
-    <input type="text" name=""  class="p-postal-code" size="8" maxlength="8" placeholder="0001111">
-    <p>住所</p>
-    <input type="text" name="" class="p-region p-locality p-street-address p-extended-address">
-    <p>生年月日</p>
-    <input type="date">
-    <p>電話番号（ハイフンなしで半角記入）</p>
-    <input type="tel" pattern="[0-9]{11}" placeholder="01012345678">
-    <p>どうやってサイトを知ったか</p>
-    <label><input type="checkbox" name="check">りんご</label>
-    <p>DM有無</p>
-    <label><input type="radio" name="radio">有</label>
-    <label><input type="radio" name="radio">無</label>
-	<p><input type="submit" value="送信"></p>
-</form>
+	<form class="h-adr" action="AccountRegister" method="post">
+		<h1>新規登録</h1>
+		<p>お名前</p>
+		<input type="text" id="name" name="name" required>
+		<p>メールアドレス</p>
+		<input type="email" id="email" name="email" required>
+		<p>パスワード（４文字以上）</p>
+		<input type="password" name="pass" id="pass" autocomplete="off"
+			minlength="4" required>
+		<p>パスワード確認（４文字以上）</p>
+		<input type="password" name="pass_confirmation" id="pass_confirmation"
+			autocomplete="off" minlength="4" required
+			onkeyup="checkPasswordMatch()">
+		<p id="confirmMessage"></p>
+		<p>郵便番号（ハイフンなし半角記入）</p>
+		<input type="hidden" class="p-country-name" value="Japan"> <input
+			type="text" name="" class="p-postal-code" size="8" maxlength="8"
+			placeholder="0001111">
+		<p>住所</p>
+		<input type="text" name=""
+			class="p-region p-locality p-street-address p-extended-address">
+		<p>生年月日</p>
+		<input type="date">
+		<p>電話番号（ハイフンなしで半角記入）</p>
+		<input type="tel" pattern="[0-9]{11}" placeholder="01012345678">
+		<p>どうやってサイトを知ったか</p>
+		<label><input type="checkbox" name="check">りんご</label>
+		<p>DM有無</p>
+		<label><input type="radio" name="radio">有</label> <label><input
+			type="radio" name="radio">無</label>
+		<p>
+			<input type="submit" value="送信">
+		</p>
+	</form>
 </body>
 </html>
