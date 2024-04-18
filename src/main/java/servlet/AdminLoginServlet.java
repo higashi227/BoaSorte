@@ -20,7 +20,7 @@ public class AdminLoginServlet extends HttpServlet {
 
 		try {
 			if (AdminDAO.validate(login)) {
-				response.sendRedirect("main.jsp");
+				response.sendRedirect("adminmanagement.jsp");
 			} else {
 				response.sendRedirect("error.jsp");
 			}
