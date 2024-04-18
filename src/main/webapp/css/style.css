@@ -1,4 +1,4 @@
-
+/*
 .coffee {
         font-family: "Monomaniac One", "Mochiy Pop P One", sans-serif;
         font-size: large;
@@ -12,15 +12,15 @@ nav{
     color:#fff;
     text-align: center;
   }
-  /* ナビゲーション横並びに */
+   ナビゲーション横並びに 
   nav ul{
     list-style: none;
     display: flex;
-    /* justify-content: center; */
+     justify-content: center; 
     justify-content: space-around;
   }
 
-  /*ナビゲーションのリンク設定*/
+  ナビゲーションのリンク設定
 nav ul li a{
     display: block;
     text-decoration: none;
@@ -37,7 +37,7 @@ nav ul li a{
     font-weight: bold;
   }
 
-  /* ヘッダー */
+   ヘッダー 
 header{
     width: 100%;
     display: flex;
@@ -84,4 +84,4 @@ header{
     width: 100vw;
  } 
 
- 
+ */
