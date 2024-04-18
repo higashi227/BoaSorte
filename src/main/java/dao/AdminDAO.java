@@ -9,8 +9,7 @@ import model.Login;
 import utils.DBUtil;
 
 public class AdminDAO {
-
-    public boolean validate(Login login) {
+    public static boolean validate(Login login) {
         boolean status = false;
         try (Connection connection = DBUtil.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM admin WHERE mail_address = ?")) {

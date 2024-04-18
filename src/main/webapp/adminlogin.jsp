@@ -9,9 +9,11 @@
 <body>
 	<form action="AdminLogin" method="post">
 		<h1>管理者ログイン</h1>
-		<br> メールアドレス<br> <input type="email" name="mailAddress"><br>
-		パスワード<br> <input type="password" name="password"><br> <input
-			type="submit" value="ログイン"><br>
+		<br>メールアドレス<br>
+		<input type="email" name="mailAddress"><br>
+		パスワード<br>
+		<input type="password" name="password"><br>
+		<input type="submit" value="ログイン">
 	</form>
 </body>
 </html>
