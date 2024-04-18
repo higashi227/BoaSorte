@@ -29,6 +29,8 @@
 			<input type="password" name="password">
 			<input type="submit" value="ログイン">
 		</form>
+		
+		<a href="Logout">ログアウト</a>
 	</main>
 
 	<footer> </footer>
