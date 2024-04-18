@@ -11,10 +11,10 @@ import java.util.List;
 import model.Item;
 import utils.DBUtil;
 
-public class ItemDao {
+public class ItemDAO {
 	private Connection conn;
 
-	public ItemDao() {
+	public ItemDAO() {
 		try {
 			this.conn = DBUtil.getConnection();
 		} catch (SQLException e) {
@@ -73,6 +73,11 @@ public class ItemDao {
 			statement.setInt(1, id);
 			statement.executeUpdate();
 		}
+	}
+
+	public List<Item> findAll() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
 	}
 
 
