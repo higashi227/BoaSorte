@@ -22,6 +22,16 @@
 				<th scope="auto">商品内容</th>
 			</tr>
 
+			<% for (Item item : itemList) {%>
+			<tr>
+				<%-- 商品ID --%>
+				<td><%= item.getItemId()%></td>
+				<%-- 商品名 --%>
+				<td><%= item.getItemName()%></td>
+				<%-- 価格 --%>
+				<td><%= item.getPrice()%></td>
+				<%-- 数量（在庫） --%>
+				<td><%= item.getis_coffee()%></td>
 			<tr>
 				<th>&nbsp;</th>
 				<td>&nbsp;</td>

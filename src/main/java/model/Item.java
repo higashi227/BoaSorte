@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Item {
 	private int id;
 	private String name; 
@@ -54,6 +56,13 @@ public class Item {
 	}
 	public void setIs_coffee(int is_coffee) {
 		this.is_coffee = is_coffee;
+	}
+
+
+
+	public static ArrayList<Item> getItem() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
 	}
 
 
