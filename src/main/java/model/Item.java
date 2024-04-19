@@ -1,69 +1,63 @@
 package model;
 
-import java.util.ArrayList;
-
 public class Item {
-	private int id;
-	private String name; 
-	private int price;
-	private int is_coffee;
+    private int itemId;
+    private String name;
+    private int price;
+    private boolean isCoffee;
 
+    // コンストラクタ
+    public Item(int itemId, String name, int price, boolean isCoffee) {
+        this.itemId = itemId;
+        this.name = name;
+        this.price = price;
+        this.isCoffee = isCoffee;
+    }
 
-	// コンストラクタ
-	public Item(int id, String name, int price, int is_coffee) {
-		this.id = id;
-		this.name = name;
-		this.price = price;
-		this.is_coffee = is_coffee;
-	}
+    // 商品IDのゲッターとセッター
+    public int getItemId() {
+        return itemId;
+    }
 
-	
-	
-	//IDのgetter.setterメソッド
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
+    }
 
-	
-	
-	//商品名のgetter.setterメソッド
-	public String getName() {
-		return name;
-	}
+    // 商品名のゲッターとセッター
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	
-	
-	//金額のgetter.setterメソッド
-	public int getPrice() {
-		return price;
-	}
-	public void setPrice(int price) {
-		this.price = price;
-	}
+    // 価格のゲッターとセッター
+    public int getPrice() {
+        return price;
+    }
 
-	
-	
-	//コーヒーかどうかのgetter.setter
-	public int getIs_coffee() {
-		return is_coffee;
-	}
-	public void setIs_coffee(int is_coffee) {
-		this.is_coffee = is_coffee;
-	}
+    public void setPrice(int price) {
+        this.price = price;
+    }
 
+    // コーヒーかどうかのゲッターとセッター
+    public boolean isCoffee() {
+        return isCoffee;
+    }
 
+    public void setCoffee(boolean coffee) {
+        isCoffee = coffee;
+    }
 
-	public static ArrayList<Item> getItem() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
-
-
+    // toStringメソッド（デバッグ用）
+    @Override
+    public String toString() {
+        return "Item{" +
+                "itemId=" + itemId +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", isCoffee=" + isCoffee +
+                '}';
+    }
 }

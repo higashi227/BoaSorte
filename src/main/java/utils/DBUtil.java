@@ -2,6 +2,8 @@ package utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DBUtil {
@@ -23,7 +25,21 @@ public class DBUtil {
         return DriverManager.getConnection(URL, USERNAME, PASSWORD);
     }
 
-    public static void closeConnection(Connection conn) {
+    public static void closeConnection(Connection conn, PreparedStatement stmt, ResultSet rs) {
+        if (rs != null) {
+            try {
+                rs.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (stmt != null) {
+            try {
+                stmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
         if (conn != null) {
             try {
                 conn.close();
