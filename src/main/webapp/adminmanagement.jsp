@@ -38,19 +38,12 @@
 
 			<c:forEach var="item" items="${item}">
 				<tr>
-					<td><c:out value="${item.id}" /></td>
+					<td><c:out value="${item.item_id}" /></td>
 					<td><c:out value="${item.name}" /></td>
 					<td><c:out value="${item.price}" /></td>
 					<td><c:out value="${item.is_coffee}" /></td>
 				</tr>
 			</c:forEach>
-
-
-
-
-
-
-
 
 			<%--<% List<Item> itemList = (List<Item>) request.getAttribute("items"); %>
 			<% for (Item item : itemList) { %>
