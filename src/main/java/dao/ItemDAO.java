@@ -26,12 +26,12 @@ public class ItemDAO {
 	//データベースから商品情報を取得するメソッド
 	public List<Item> getAllItems() throws SQLException {
 		List<Item> items = new ArrayList<>();
-		String sql = "SELECT * FROM items";
+		String sql = "SELECT * FROM item";
 
 		try (PreparedStatement statement = conn.prepareStatement(sql);
 				ResultSet resultSet = statement.executeQuery()) {
 			while (resultSet.next()) {
-				int id = resultSet.getInt("id");
+				int id = resultSet.getInt("item_id");
 				String name = resultSet.getString("name");
 				int price = resultSet.getInt("price");
 				int is_coffee = resultSet.getInt("is_coffee");
@@ -43,7 +43,7 @@ public class ItemDAO {
 
 	// 商品を登録するメソッド（インサート）
 	public void addItem(Item item) throws SQLException {
-		String sql = "INSERT INTO items (name, price, is_coffee) VALUES (?, ?, ?)";
+		String sql = "INSERT INTO item (name, price, is_coffee) VALUES (?, ?, ?)";
 		try (PreparedStatement statement = conn.prepareStatement(sql)) {
 			statement.setString(1, item.getName());
 			statement.setInt(2, item.getPrice());
@@ -55,7 +55,7 @@ public class ItemDAO {
 
 	// 商品を編集するメソッド（アップデート）
 	public void editItem(Item item) throws SQLException {
-		String sql = "UPDATE items SET name = ?, price = ?, is_coffee = ? WHERE id = ?";
+		String sql = "UPDATE item SET name = ?, price = ?, is_coffee = ? WHERE id = ?";
 		try (PreparedStatement statement = conn.prepareStatement(sql)) {
 			statement.setString(1, item.getName());
 			statement.setInt(2, item.getPrice());
@@ -68,7 +68,7 @@ public class ItemDAO {
 
 	// 商品を削除するメソッド（デリート）
 	public void deleteItem(int id) throws SQLException {
-		String sql = "DELETE FROM items WHERE id = ?";
+		String sql = "DELETE FROM item WHERE id = ?";
 		try (PreparedStatement statement = conn.prepareStatement(sql)) {
 			statement.setInt(1, id);
 			statement.executeUpdate();
