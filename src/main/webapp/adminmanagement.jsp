@@ -1,7 +1,7 @@
 <%--管理者画面--%>
 
-<%@ page import="java.util.List" %>
-<%@ page import="model.Item" %>
+<%@ page import="java.util.List"%>
+<%@ page import="model.Item"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -36,20 +36,37 @@
 
 		<tbody>
 
-			
-			<% List<Item> itemList = (List<Item>) request.getAttribute("items"); %>
+			<c:forEach var="item" items="${item}">
+				<tr>
+					<td><c:out value="${item.id}" /></td>
+					<td><c:out value="${item.name}" /></td>
+					<td><c:out value="${item.price}" /></td>
+					<td><c:out value="${item.is_coffee}" /></td>
+				</tr>
+			</c:forEach>
+
+
+
+
+
+
+
+
+			<%--<% List<Item> itemList = (List<Item>) request.getAttribute("items"); %>
 			<% for (Item item : itemList) { %>
 			<tr>
 				<%-- 商品ID --%>
-				<td><%= item.getId() %></td>
-				<%-- 商品名 --%>
-				<td><%= item.getName() %></td>
-				<%-- 価格 --%>
-				<td><%= item.getPrice() %></td>
-				<%-- コーヒーかどうか --%>
-				<td><%= item.getIs_coffee() %></td>
-			</tr>
-			<% } %>
+			<%--<td><%= item.getId() --%>
+			<%--</td>--%>
+			<%-- 商品名 --%>
+			<%--<td><%= item.getName() --%>
+			<%--</td>--%>
+			<%-- 価格 --%>
+			<%--<td><%= item.getPrice() %></td>--%>
+			<%-- コーヒーかどうか --%>
+			<%--<td><%= item.getIs_coffee() %></td>--%>
+			<%--</tr>
+			<% } %>--%>
 
 		</tbody>
 	</table>
