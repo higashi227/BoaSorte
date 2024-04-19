@@ -23,7 +23,7 @@ public class ItemViewServlet extends HttpServlet {
 
 		// データベースから備品情報を取得
 		ItemDAO itemDAO = new ItemDAO();
-		List<Item>items = itemDAO.getAllItem();
+		List<Item>items = ItemDAO.getAllItem();
 		
 
 		//取得した備品情報をリクエスト属性にセット
