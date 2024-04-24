@@ -1,20 +1,17 @@
 <%--新規登録ページ--%>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>新規登録</title>
+<title>BoaSorte--新規登録</title>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/style.css">
 <!-- 郵便番号から住所自動入力のために必要 -->
  <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
 <script>
-	//パスワードとパスワード確認の値が一致しない場合にエラーメッセージを表示。
-	//onkeyupイベントでpass_confirmationと関連付け。入力の度にエラーがあれば表示される動作。
     function checkPasswordMatch() {
-        var password = document.getElementById("pass").value;
+        var password = document.getElementById("password").value;
         var confirmPassword = document.getElementById("pass_confirmation").value;
         var message = document.getElementById("confirmMessage");
         if (password != confirmPassword) {
@@ -25,11 +22,8 @@
         }
     }
     
-	//送信時の確認
-	//パスワードとパスワード確認の値が一致しない場合、エラーメッセージを表示→フォームの送信を中止。
-	//一致する場合は送信を許可。
     function validateForm() {
-        var password = document.getElementById("pass").value;
+        var password = document.getElementById("password").value;
         var confirmPassword = document.getElementById("pass_confirmation").value;
         if (password != confirmPassword) {
             document.getElementById("confirmMessage").innerHTML = "パスワードが一致しません";
@@ -42,9 +36,10 @@
 </script>
 </head>
 <body>
+	<jsp:include page="header.jsp" />
     <h2>アカウント登録フォーム</h2>
     <form action="register" method="post" class="h-adr">
-        <label>名前:</label>
+        <label>名前</label>
         <input type="text" name="name" required><br>
         
         <label>メールアドレス</label>

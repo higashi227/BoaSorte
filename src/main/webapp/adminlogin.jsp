@@ -2,14 +2,13 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>管理者ログイン</title>
-</head>
+<jsp:include page="head.jsp">
+	<jsp:param name="pageTitle" value="BoaSorte--管理者ログイン" />
+</jsp:include>
 <body>
 	<form action="AdminLogin" method="post">
-		<h1>管理者ログイン</h1>
-		<br>メールアドレス<br>
+		<h2>管理者ログイン</h2>
+		メールアドレス<br>
 		<input type="email" name="mailAddress"><br>
 		パスワード<br>
 		<input type="password" name="password"><br>

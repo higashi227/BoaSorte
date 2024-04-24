@@ -4,13 +4,12 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8">
-	<title>マイページ</title>
-</head>
+<jsp:include page="head.jsp">
+	<jsp:param name="pageTitle" value="BoaSorte--マイページ" />
+</jsp:include>
 
 <body>
-	<header> </header>
+	<jsp:include page="header.jsp" />
 	<main>
 		ユーザー情報
 		<table>

@@ -4,11 +4,10 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<jsp:include page="head.jsp">
+	<jsp:param name="pageTitle" value="BoaSorte--購入内容確認" />
+</jsp:include>
 <body>
-
+	<jsp:include page="header.jsp" />
 </body>
 </html>

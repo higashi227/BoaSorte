@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
 <%@ page import="model.Item"%>
 
 <html lang="ja">
-
-	<head>
-    	<title>商品編集</title>
-	</head>
-
+<jsp:include page="head.jsp">
+	<jsp:param name="pageTitle" value="BoaSorte--管理者編集ページ" />
+</jsp:include>
 	<body>
 	
-    	<h1>商品編集</h1>
+    	<h2>商品編集</h2>
     	
     	<form action="ItemAddServlet" method="post">
     	

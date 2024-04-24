@@ -5,12 +5,11 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>新規登録確認画面</title>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/style.css">
-</head>
+<jsp:include page="head.jsp">
+	<jsp:param name="pageTitle" value="BoaSorte--登録内容確認" />
+</jsp:include>
 <body>
+<jsp:include page="header.jsp" />
 <h1>登録内容確認</h1>
 <p>名前：<%= %></p>
 <p>パスワード：<%= %></p>

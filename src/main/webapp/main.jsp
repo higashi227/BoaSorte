@@ -2,11 +2,11 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
+<jsp:include page="head.jsp">
+	<jsp:param name="pageTitle" value="BoaSorte -- TOPページ" />
+</jsp:include>
 <body>
-
+	<jsp:include page="header.jsp" />
+メインページです
 </body>
 </html>

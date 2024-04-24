@@ -4,10 +4,9 @@
 <%@ page import="java.util.List"%>
 <%@ page import="model.Item"%>
 <html lang="ja">
-<head>
-<meta charset="UTF-8">
-<title>管理者ページ</title>
-</head>
+<jsp:include page="head.jsp">
+	<jsp:param name="pageTitle" value="BoaSorte--管理者ページ" />
+</jsp:include>
 <body>
 	<table border="1">
 		<caption>【商品管理】</caption>
