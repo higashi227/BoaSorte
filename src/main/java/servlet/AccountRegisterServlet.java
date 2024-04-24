@@ -63,7 +63,7 @@ public class AccountRegisterServlet extends HttpServlet {
             request.setAttribute("message", "アカウントの登録に失敗しました。");
         } finally {
             // リソースを解放
-            DBUtil.closeConnection(conn);
+            DBUtil.closeConnection(conn, pstmt, null);
             if (pstmt != null) {
                 try {
                     pstmt.close();
@@ -77,3 +77,4 @@ public class AccountRegisterServlet extends HttpServlet {
         request.getRequestDispatcher("/register-result.jsp").forward(request, response);
     }
 }
+
