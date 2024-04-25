@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -20,7 +22,7 @@ public class AccountRegisterServlet extends HttpServlet {
             throws ServletException, IOException {
         // フォームからのデータを取得
         String mailAddress = request.getParameter("mail_address");
-        String password = request.getParameter("password");
+        String rawPassword = request.getParameter("password"); // 生のパスワードを取得
         String name = request.getParameter("name");
         String postnum = request.getParameter("postnum");
         String address = request.getParameter("address");
@@ -28,6 +30,9 @@ public class AccountRegisterServlet extends HttpServlet {
         String telephone = request.getParameter("telephone");
         String recognition = request.getParameter("recognition");
         String okDm = request.getParameter("ok_dm");
+
+        // パスワードをハッシュ化
+        String hashedPassword = hashPassword(rawPassword);
 
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -42,7 +47,7 @@ public class AccountRegisterServlet extends HttpServlet {
 
             // パラメータをセット
             pstmt.setString(1, mailAddress);
-            pstmt.setString(2, password);
+            pstmt.setString(2, hashedPassword); // ハッシュ化したパスワードをセット
             pstmt.setString(3, name);
             pstmt.setString(4, postnum);
             pstmt.setString(5, address);
@@ -76,5 +81,23 @@ public class AccountRegisterServlet extends HttpServlet {
         // メッセージを表示するページにリダイレクト
         request.getRequestDispatcher("/register-result.jsp").forward(request, response);
     }
-}
 
+    // パスワードをハッシュ化するメソッド
+    private String hashPassword(String password) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(password.getBytes());
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            // エラーが発生した場合、例外を処理するか、適切な方法でエラーメッセージを処理する
+            return null;
+        }
+    }
+}

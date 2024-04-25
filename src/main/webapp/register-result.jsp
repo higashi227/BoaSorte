@@ -5,7 +5,8 @@
 	<jsp:param name="pageTitle" value="BoaSorte--登録完了" />
 </jsp:include>
 <body>
-    <h2>アカウント登録結果<<jsp:include page="header.jsp" />h2>
+	<jsp:include page="header.jsp" />
+    <h2>アカウント登録結果</h2>
     <p>${message}</p>
     <a href="index">ホームページに戻る</a>
 </body>

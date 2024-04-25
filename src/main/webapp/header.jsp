@@ -1,6 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" session="false" %>
 	<header>
-		<h1 class="logo">BoaSorte</h1>
+		<h1 class="logo">
+			<a href="/">BoaSorte</a>
+		</h1>
+		
 		<nav>
 			<ul>
 				<li><a href="">TOP</a></li>
