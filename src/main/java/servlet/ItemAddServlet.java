@@ -53,12 +53,18 @@ public class ItemAddServlet extends HttpServlet {
          newItem.setPrice(price);
          newItem.setIsCoffee(isCoffee);
          
+
+         // 商品情報を更新
+         Product product = new Product(name, price,isCoffee);
+        ProductService.updateProduct(product);
+/*メインのコード
       // 備品情報を新規登録
          ItemDAO itemDAO = new ItemDAO();
          itemDAO.addItem(newItem);
 
       // 新規登録後の備品情報を取得
          List<Item> updatedItem = itemDAO.getAllItems();
+*/
          
          // 取得した備品情報をリクエスト属性にセット
          request.setAttribute("items", updatedItem);
@@ -69,6 +75,3 @@ public class ItemAddServlet extends HttpServlet {
     
     
     }
-}
-
-    

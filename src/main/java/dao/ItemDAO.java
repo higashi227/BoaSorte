@@ -19,6 +19,7 @@ public class ItemDAO {
 	    PreparedStatement stmt = null;
 	    ResultSet rs = null;
 	    
+	    
 	    try {
 	        conn = DBUtil.getConnection(); // DB接続
 	        
