@@ -25,6 +25,18 @@ public class DBUtil {
         return DriverManager.getConnection(URL, USERNAME, PASSWORD);
     }
 
+ // Connectionのみをクローズするメソッド
+    public static void closeConnection(Connection conn) {
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    // Connection, PreparedStatement, ResultSetをクローズするメソッドを追加
     public static void closeConnection(Connection conn, PreparedStatement stmt, ResultSet rs) {
         if (rs != null) {
             try {
@@ -40,12 +52,6 @@ public class DBUtil {
                 e.printStackTrace();
             }
         }
-        if (conn != null) {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+        closeConnection(conn); // Connectionをクローズする既存のメソッドを再利用
     }
 }

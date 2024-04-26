@@ -19,6 +19,7 @@ public class ItemDAO {
 	    PreparedStatement stmt = null;
 	    ResultSet rs = null;
 	    
+	    
 	    try {
 	        conn = DBUtil.getConnection(); // DB接続
 	        
@@ -49,5 +50,10 @@ public class ItemDAO {
 	    }
 	    
 	    return itemList;
+	}
+
+	public void addItem(Item item) {
+		// TODO 自動生成されたメソッド・スタブ
+		
 	}
 }
