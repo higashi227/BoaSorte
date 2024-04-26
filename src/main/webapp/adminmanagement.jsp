@@ -44,7 +44,7 @@
 	</table>
 
 
-	<form action="" method="post" class="form-inline">
+	<form action="ItemEditServlet" method="post" class="form-inline">
 		<input type="submit" value="編集画面へ" class="button-inline">
 	</form>
 </body>

@@ -14,7 +14,15 @@ public class Item {
         this.isCoffee = isCoffee;
     }
 
-    // 商品IDのゲッターとセッター
+    public Item(String name2, int price2, boolean isCoffee2) {
+		// TODO 自動生成されたコンストラクター・スタブ
+	}
+
+	public Item() {
+		// TODO 自動生成されたコンストラクター・スタブ
+	}
+
+	// 商品IDのゲッターとセッター
     public int getItemId() {
         return itemId;
     }
@@ -60,4 +68,9 @@ public class Item {
                 ", isCoffee=" + isCoffee +
                 '}';
     }
+
+	public void setIsCoffee(boolean isCoffee2) {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
 }
