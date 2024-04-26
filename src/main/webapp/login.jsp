@@ -7,13 +7,14 @@
 </jsp:include>
 <body>
 	<jsp:include page="header.jsp" />
-	<form action="Login" method="post">
-		<br> メールアドレス<br> <input type="email" name="email"><br>
-		パスワード<br> <input type="password" name="pass"><br> <input
-			type="submit" value="ログイン"><br>
-		<!-- 新規登録へのリンク -->
-		<div class="text">
-			<a href="register.jsp">初めて利用する方はこちら</a>
-		</div>
+	<main>
+		<form action="Login" method="post">
+			メールアドレス
+			<input type="text" name="mailAddress">
+			パスワード
+			<input type="password" name="password">
+			<input type="submit" value="ログイン">
+		</form>
+	</main>
 </body>
 </html>
