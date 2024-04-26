@@ -51,4 +51,9 @@ public class ItemDAO {
 	    
 	    return itemList;
 	}
+
+	public void addItem(Item item) {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
 }
