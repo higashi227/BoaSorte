@@ -51,7 +51,7 @@ public class ItemAddServlet extends HttpServlet {
          
          // 商品情報を更新
          Product product = new Product(name, price,isCoffee);
-         ProductService.updateProduct(product);
+        ProductService.updateProduct(product);
          
          // 更新後、商品一覧ページにリダイレクト
          response.sendRedirect("adminmanagement.jsp");
@@ -61,5 +61,5 @@ public class ItemAddServlet extends HttpServlet {
     
     
     }
-}
-    
+
+  
