@@ -8,6 +8,6 @@
 	<jsp:include page="header.jsp" />
     <h2>アカウント登録結果</h2>
     <p>${message}</p>
-    <a href="index">ホームページに戻る</a>
+    <a href="index.jsp">ホームページに戻る</a>
 </body>
 </html>
