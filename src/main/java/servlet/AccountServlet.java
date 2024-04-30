@@ -12,36 +12,22 @@ import java.util.Map;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import utils.DBUtil;
 
-@WebServlet("/my-page")
 public class AccountServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("user") == null) {
-            // 未ログインの場合はログインページにリダイレクト
-            response.sendRedirect("login.jsp");
-            return;
-        }
-
-        String loggedInUser = (String) session.getAttribute("user"); // ログインユーザーのメールアドレスを取得
-
         List<Map<String, String>> accounts = new ArrayList<>();
 
-        // データベースからログインしたユーザーに関連するデータのみを取得
+        // データベースからアカウント情報を取得
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
             conn = DBUtil.getConnection();
-            System.out.println("データベース接続成功");
-            stmt = conn.prepareStatement("SELECT * FROM boasorte.account WHERE mail_address = ?");
-            stmt.setString(1, loggedInUser);
+            stmt = conn.prepareStatement("SELECT * FROM boasorte.account");
             rs = stmt.executeQuery();
 
             // 結果をリストに格納
@@ -68,9 +54,6 @@ public class AccountServlet extends HttpServlet {
 
         // JSPにアカウント情報を渡す
         request.setAttribute("accounts", accounts);
-        System.out.println("アカウント情報をリクエストスコープにセットしました: " + accounts); // リクエストスコープにセットされたアカウント情報を確認するためのログ
-
-        // マイページにフォワード
         RequestDispatcher dispatcher = request.getRequestDispatcher("/my-page.jsp");
         dispatcher.forward(request, response);
     }
