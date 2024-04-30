@@ -46,7 +46,7 @@ public class ItemDAO {
 	        throw e; // SQLExceptionを再スローする
 	    } finally {
 	        // リソースの解放
-	        DBUtil.closeConnection(conn, stmt, rs);
+	    	DBUtil.closeResources(conn, stmt, rs);
 	    }
 	    
 	    return itemList;
@@ -56,6 +56,7 @@ public class ItemDAO {
     public static void addItem(Item item) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
+        ResultSet rs = null;
         
         try {
             conn = DBUtil.getConnection(); // DB接続
@@ -76,7 +77,7 @@ public class ItemDAO {
             throw e; // SQLExceptionを再スローする
         } finally {
             // リソースの解放
-            DBUtil.closeConnection(conn, stmt, null);
+        	DBUtil.closeResources(conn, stmt, rs);
         }
     }
 
