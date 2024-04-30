@@ -6,9 +6,9 @@
 		
 		<nav>
 			<ul>
-				<li><a href="aa.jsp">会員登録</a></li>
-				<li><a href="aa.jsp">マイページ</a></li>
-				<li><a href="aa.jsp">カート</a></li>
+				<li><a href="register.jsp">会員登録</a></li>
+				<li><a href="login.jsp">マイページ</a></li>
+				<li><a href="cart.jsp">カート</a></li>
 			</ul>
 		</nav>
 	</header>

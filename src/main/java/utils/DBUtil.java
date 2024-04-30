@@ -11,47 +11,43 @@ public class DBUtil {
     private static final String USERNAME = "root";
     private static final String PASSWORD = "adminadmin";
 
-    // static initializerを使用して、クラスがロードされる時にドライバをロードする
     static {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
-            System.err.println("MySQL JDBCドライバが見つかりませんでした。");
-            e.printStackTrace();
+            throw new RuntimeException("MySQL JDBCドライバが見つかりませんでした。", e);
         }
     }
 
-    public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(URL, USERNAME, PASSWORD);
-    }
-
- // Connectionのみをクローズするメソッド
-    public static void closeConnection(Connection conn) {
-        if (conn != null) {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+    public static Connection getConnection() {
+        try {
+            return DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        } catch (SQLException e) {
+            throw new RuntimeException("データベース接続の取得中にエラーが発生しました。", e);
         }
     }
 
-    // Connection, PreparedStatement, ResultSetをクローズするメソッドを追加
-    public static void closeConnection(Connection conn, PreparedStatement stmt, ResultSet rs) {
+    public static void closeResources(Connection conn, PreparedStatement stmt, ResultSet rs) {
         if (rs != null) {
             try {
                 rs.close();
             } catch (SQLException e) {
-                e.printStackTrace();
+                // ログなどにエラーを記録する
             }
         }
         if (stmt != null) {
             try {
                 stmt.close();
             } catch (SQLException e) {
-                e.printStackTrace();
+                // ログなどにエラーを記録する
             }
         }
-        closeConnection(conn); // Connectionをクローズする既存のメソッドを再利用
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                // ログなどにエラーを記録する
+            }
+        }
     }
 }

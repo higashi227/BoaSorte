@@ -20,6 +20,8 @@ public class AccountRegisterServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String message = "";
+
         // フォームからのデータを取得
         String mailAddress = request.getParameter("mail_address");
         String rawPassword = request.getParameter("password"); // 生のパスワードを取得
@@ -34,51 +36,21 @@ public class AccountRegisterServlet extends HttpServlet {
         // パスワードをハッシュ化
         String hashedPassword = hashPassword(rawPassword);
 
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-
-        try {
-            // データベースに接続
-            conn = DBUtil.getConnection();
-
-            // SQLクエリの準備
-            String sql = "INSERT INTO account (mail_address, password, name, postnum, address, birthday, telephone, recognition, ok_dm, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
-            pstmt = conn.prepareStatement(sql);
-
-            // パラメータをセット
-            pstmt.setString(1, mailAddress);
-            pstmt.setString(2, hashedPassword); // ハッシュ化したパスワードをセット
-            pstmt.setString(3, name);
-            pstmt.setString(4, postnum);
-            pstmt.setString(5, address);
-            pstmt.setString(6, birthday);
-            pstmt.setString(7, telephone);
-            pstmt.setString(8, recognition);
-            pstmt.setString(9, okDm);
+        // データベース操作
+        try (Connection conn = DBUtil.getConnection();
+             PreparedStatement pstmt = createStatement(conn, mailAddress, hashedPassword, name, postnum, address, birthday, telephone, recognition, okDm)) {
 
             // クエリの実行
             pstmt.executeUpdate();
-
-            // 登録成功のメッセージをセット
-            request.setAttribute("message", "アカウントが正常に登録されました。");
+            message = "アカウントが正常に登録されました。";
 
         } catch (SQLException ex) {
-            // エラー処理
             ex.printStackTrace();
-            request.setAttribute("message", "アカウントの登録に失敗しました。");
-        } finally {
-            // リソースを解放
-            DBUtil.closeConnection(conn, pstmt, null);
-            if (pstmt != null) {
-                try {
-                    pstmt.close();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-            }
+            message = "アカウントの登録に失敗しました。";
         }
 
-        // メッセージを表示するページにリダイレクト
+        // メッセージをセットしてリダイレクト
+        request.setAttribute("message", message);
         request.getRequestDispatcher("/register-result.jsp").forward(request, response);
     }
 
@@ -99,5 +71,21 @@ public class AccountRegisterServlet extends HttpServlet {
             // エラーが発生した場合、例外を処理するか、適切な方法でエラーメッセージを処理する
             return null;
         }
+    }
+
+    // PreparedStatementを作成するメソッド
+    private PreparedStatement createStatement(Connection conn, String mailAddress, String hashedPassword, String name, String postnum, String address, String birthday, String telephone, String recognition, String okDm) throws SQLException {
+        String sql = "INSERT INTO account (mail_address, password, name, postnum, address, birthday, telephone, recognition, ok_dm, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, mailAddress);
+        pstmt.setString(2, hashedPassword);
+        pstmt.setString(3, name);
+        pstmt.setString(4, postnum);
+        pstmt.setString(5, address);
+        pstmt.setString(6, birthday);
+        pstmt.setString(7, telephone);
+        pstmt.setString(8, recognition);
+        pstmt.setString(9, okDm);
+        return pstmt;
     }
 }

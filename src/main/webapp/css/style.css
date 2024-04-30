@@ -60,7 +60,6 @@ li {
 
 .main-logo {
     margin: 0;
-    background-color: rgba(0,0,0,.5);
     padding: 10px;
 }
 
@@ -70,46 +69,19 @@ li {
     font-style: normal;
     font-size: 5rem;
     color: #fff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,1);
+}
+
+/* index.jsp メインビジュアル用 */
+.eachTextAnime span{
+	opacity: 0;
+}
+.eachTextAnime.appeartext span{
+	 animation:text_anime_on 1s ease-out forwards; 
+}
+@keyframes text_anime_on {
+	0% {opacity:0;}
+	100% {opacity:1;}
 }
 
 
-/* 滑らかに変形して出現 */
-.smooth {
-    animation-name: smoothAnime;
-    animation-duration: 1s;
-    animation-fill-mode: forwards;
-    transform-origin: left;
-    opacity: 0;
-}
-
-.flex {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.box {
-    width: 220px;
-    padding: 20px;
-    margin: 0 20px 20px 20px;
-    background: #666;
-    color: #fff;
-    box-sizing: border-box;
-}
-
-@keyframes smoothAnime {
-    from {
-        transform: translate3d(0, 100%, 0) skewY(12deg);
-        opacity: 0;
-    }
-
-    to {
-        transform: translate3d(0, 0, 0) skewY(0);
-        opacity: 1;
-    }
-}
-
-/* スクロールをしたら出現する要素にはじめに透過0を指定 */
-
-.smoothTrigger {
-    opacity: 0;
-}
