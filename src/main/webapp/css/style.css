@@ -72,6 +72,10 @@ li {
     text-shadow: 2px 2px 4px rgba(0,0,0,1);
 }
 
+main {
+    padding-top: 100px; /* ヘッダーの高さに応じて適切な値に調整 */
+}
+
 /* index.jsp メインビジュアル用 */
 .eachTextAnime span{
 	opacity: 0;
