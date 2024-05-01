@@ -50,7 +50,6 @@ public class ItemDAO {
         
         return itemList;
     }
-
     // 商品を追加するメソッド
     public static void addItem(Item item) throws SQLException {
         Connection conn = null;
