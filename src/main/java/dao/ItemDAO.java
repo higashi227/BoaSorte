@@ -46,7 +46,8 @@ public class ItemDAO {
 	        throw e; // SQLExceptionを再スローする
 	    } finally {
 	        // リソースの解放
-	    	DBUtil.closeResources(conn, stmt, rs);
+	        DBUtil.closeResources(conn, stmt, rs);
+
 	    }
 	    
 	    return itemList;
