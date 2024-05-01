@@ -41,9 +41,9 @@ public class AdminItemAddServlet extends HttpServlet {
 
 
 		// 商品情報をデータベースに追加		
-		ItemDAO itemDAO = new ItemDAO();
+        ItemDAO itemDAO = new ItemDAO();
         try {
-            dao.ItemDAO.addItem(newItem);
+            ItemDAO.addItem(newItem);
             List<Item> updatedItems = ItemDAO.getAllItems();
             request.setAttribute("itemList", updatedItems);
             response.sendRedirect("adminmanagement.jsp");

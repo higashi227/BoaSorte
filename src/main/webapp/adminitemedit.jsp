@@ -23,10 +23,8 @@
         	<label for="is_coffee">コーヒー</label>
         		<input type="checkbox" id="is_coffee" name="is_coffee"><br><br>
 				
+    		<input type="submit" value="保存">
     	</form>
-    	
-    	<form action="AdminItemAddServlet" method="post" class="form-inline">
-    	<input type="submit" value="保存">
 
 
 	</body>
