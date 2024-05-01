@@ -4,25 +4,19 @@ public class Item {
     private int itemId;
     private String name;
     private int price;
-    private boolean isCoffee;
+    private int isCoffee;
 
-    // コンストラクタ
-    public Item(int itemId, String name, int price, boolean isCoffee) {
+    // デフォルトコンストラクタ
+    public Item() {
+    }
+
+    public Item(int itemId, String name, int price, int isCoffee) {
         this.itemId = itemId;
         this.name = name;
         this.price = price;
         this.isCoffee = isCoffee;
     }
 
-    public Item(String name2, int price2, boolean isCoffee2) {
-		// TODO 自動生成されたコンストラクター・スタブ
-	}
-
-	public Item() {
-		// TODO 自動生成されたコンストラクター・スタブ
-	}
-
-	// 商品IDのゲッターとセッター
     public int getItemId() {
         return itemId;
     }
@@ -31,7 +25,6 @@ public class Item {
         this.itemId = itemId;
     }
 
-    // 商品名のゲッターとセッター
     public String getName() {
         return name;
     }
@@ -40,7 +33,6 @@ public class Item {
         this.name = name;
     }
 
-    // 価格のゲッターとセッター
     public int getPrice() {
         return price;
     }
@@ -49,16 +41,24 @@ public class Item {
         this.price = price;
     }
 
-    // コーヒーかどうかのゲッターとセッター
-    public boolean isCoffee() {
+    public int getIsCoffee() {
         return isCoffee;
     }
 
-    public void setCoffee(boolean coffee) {
-        isCoffee = coffee;
+    public void setIsCoffee(int isCoffee) {
+        this.isCoffee = isCoffee;
     }
 
-    // toStringメソッド（デバッグ用）
+    // isCoffee フィールドの状態を boolean 型として返すメソッド
+    public boolean isCoffeeBoolean() {
+        return isCoffee == 1;
+    }
+
+    // isCoffee フィールドの状態を boolean 型として設定するメソッド
+    public void setIsCoffeeBoolean(boolean coffee) {
+        this.isCoffee = coffee ? 1 : 0;
+    }
+
     @Override
     public String toString() {
         return "Item{" +
@@ -68,9 +68,4 @@ public class Item {
                 ", isCoffee=" + isCoffee +
                 '}';
     }
-
-	public void setIsCoffee(boolean isCoffee2) {
-		// TODO 自動生成されたメソッド・スタブ
-		
-	}
 }

@@ -13,47 +13,44 @@ import utils.DBUtil;
 public class ItemDAO {
     
     // 商品情報を取得するメソッド
-	public static List<Item> getAllItems() throws SQLException {
-	    List<Item> itemList = new ArrayList<>();
-	    Connection conn = null;
-	    PreparedStatement stmt = null;
-	    ResultSet rs = null;
-	    
-	    
-	    try {
-	        conn = DBUtil.getConnection(); // DB接続
-	        
-	        // SQLクエリを定義
-	        String sql = "SELECT * FROM boasorte.item";
-	        
-	        // ステートメントを作成
-	        stmt = conn.prepareStatement(sql);
-	        
-	        // クエリを実行し、結果を取得
-	        rs = stmt.executeQuery();
-	        
-	        // 結果セットから商品情報を取得し、リストに追加
-	        while (rs.next()) {
-	            int itemId = rs.getInt("item_id");
-	            String name = rs.getString("name");
-	            int price = rs.getInt("price");
-	            boolean isCoffee = rs.getBoolean("is_coffee");
-	            Item item = new Item(itemId, name, price, isCoffee);
-	            itemList.add(item);
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	        throw e; // SQLExceptionを再スローする
-	    } finally {
-	        // リソースの解放
-	        DBUtil.closeResources(conn, stmt, rs);
-
-	    }
-	    
-	    return itemList;
-	}
-
-	  // 商品を追加するメソッド
+    public static List<Item> getAllItems() throws SQLException {
+        List<Item> itemList = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            conn = DBUtil.getConnection(); // DB接続
+            
+            // SQLクエリを定義
+            String sql = "SELECT * FROM boasorte.item";
+            
+            // ステートメントを作成
+            stmt = conn.prepareStatement(sql);
+            
+            // クエリを実行し、結果を取得
+            rs = stmt.executeQuery();
+            
+            // 結果セットから商品情報を取得し、リストに追加
+            while (rs.next()) {
+                int itemId = rs.getInt("item_id");
+                String name = rs.getString("name");
+                int price = rs.getInt("price");
+                int isCoffee = rs.getInt("is_coffee"); // TINYINTをint型で取得
+                Item item = new Item(itemId, name, price, isCoffee);
+                itemList.add(item);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e; // SQLExceptionを再スローする
+        } finally {
+            // リソースの解放
+            DBUtil.closeResources(conn, stmt, rs);
+        }
+        
+        return itemList;
+    }
+    // 商品を追加するメソッド
     public static void addItem(Item item) throws SQLException {
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -69,7 +66,7 @@ public class ItemDAO {
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, item.getName());
             stmt.setInt(2, item.getPrice());
-            stmt.setBoolean(3, item.isCoffee());
+            stmt.setInt(3, item.getIsCoffee()); // int型として設定
             
             // クエリを実行
             stmt.executeUpdate();
@@ -78,13 +75,12 @@ public class ItemDAO {
             throw e; // SQLExceptionを再スローする
         } finally {
             // リソースの解放
-        	DBUtil.closeResources(conn, stmt, rs);
+            DBUtil.closeResources(conn, stmt, rs);
         }
     }
 
-
-	public Item getItemById(int itemId) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
+    public Item getItemById(int itemId) {
+        // TODO 自動生成されたメソッド・スタブ
+        return null;
+    }
 }
