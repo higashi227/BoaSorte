@@ -76,8 +76,7 @@
         </select><br>
        	
        	<label>ダイレクトメッセージの受信を許可する</label>
-       	<input type="hidden" name="ok_dm" value="0">
-       	<input type="checkbox" name="ok_dm" value="1"><br>
+		<input type="checkbox" id="ok_dm_checkbox" name="ok_dm" value="1"><br>
         
         <input type="submit" value="登録">
     </form>
