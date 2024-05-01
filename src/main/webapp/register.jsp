@@ -8,7 +8,7 @@
 	<title>BoaSorte--新規登録</title>
 	<link rel="stylesheet" href="css/style.css">
 <!-- 郵便番号から住所自動入力のために必要 -->
- <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
+<script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
 <script>
     function checkPasswordMatch() {
         var password = document.getElementById("password").value;
