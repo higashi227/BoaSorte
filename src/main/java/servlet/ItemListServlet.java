@@ -19,7 +19,7 @@ public class ItemListServlet extends HttpServlet {
         ItemDAO itemDAO = new ItemDAO();
         List<Item> itemList = null;
         try {
-			itemList = itemDAO.getAllItems();
+			itemList = ItemDAO.getAllItems();
 		} catch (SQLException e) {
 			// SQLエラーが発生した場合の処理
 			request.setAttribute("errorMessage", "商品情報の取得中にエラーが発生しました。");

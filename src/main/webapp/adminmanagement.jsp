@@ -28,7 +28,7 @@
 				<td><%= item.getItemId() %></td>
 				<td><%= item.getName() %></td>
 				<td><%= item.getPrice() %></td>
-				<td><%= item.isCoffee() ? "コーヒー" : "コーヒーでない" %></td>
+				<td><%= item.getIsCoffee() == 1 ? "コーヒー" : "コーヒーでない" %></td>
 			</tr>
 			<% 
                     }
