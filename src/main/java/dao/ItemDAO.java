@@ -13,7 +13,7 @@ import utils.DBUtil;
 public class ItemDAO {
     
     // 商品情報を取得するメソッド
-	public List<Item> getAllItems() throws SQLException {
+	public static List<Item> getAllItems() throws SQLException {
 	    List<Item> itemList = new ArrayList<>();
 	    Connection conn = null;
 	    PreparedStatement stmt = null;
@@ -47,13 +47,44 @@ public class ItemDAO {
 	    } finally {
 	        // リソースの解放
 	        DBUtil.closeResources(conn, stmt, rs);
+
 	    }
 	    
 	    return itemList;
 	}
 
-	public void addItem(Item item) {
+	  // 商品を追加するメソッド
+    public static void addItem(Item item) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            conn = DBUtil.getConnection(); // DB接続
+            
+            // SQLクエリを定義
+            String sql = "INSERT INTO boasorte.item (name, price, is_coffee) VALUES (?, ?, ?)";
+            
+            // ステートメントを作成
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, item.getName());
+            stmt.setInt(2, item.getPrice());
+            stmt.setBoolean(3, item.isCoffee());
+            
+            // クエリを実行
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e; // SQLExceptionを再スローする
+        } finally {
+            // リソースの解放
+        	DBUtil.closeResources(conn, stmt, rs);
+        }
+    }
+
+
+	public Item getItemById(int itemId) {
 		// TODO 自動生成されたメソッド・スタブ
-		
+		return null;
 	}
 }

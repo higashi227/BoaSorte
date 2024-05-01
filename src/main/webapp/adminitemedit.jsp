@@ -12,7 +12,7 @@
 	
     	<h2>商品編集</h2>
     	
-    	<form action="ItemAddServlet" method="post">
+    	<form action="AdminItemAddServlet" method="post">
     	
         	<label for="name">商品名:</label>
         		<input type="text" id="name" name="name"><br><br>
@@ -25,10 +25,12 @@
 				
     	</form>
     	
-    	<form action="ItemAddServlet" method="post" class="form-inline">
+    	<form action="AdminItemAddServlet" method="post" class="form-inline">
     	<input type="submit" value="保存">
 
 
 	</body>
 
 </html>
+
+

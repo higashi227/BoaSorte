@@ -37,7 +37,6 @@
 </head>
 <body>
 	<jsp:include page="header.jsp" />
-	<main>
     <h2>アカウント登録フォーム</h2>
     <form action="register" method="post" class="h-adr">
         <label>名前</label>
@@ -77,11 +76,11 @@
         </select><br>
        	
        	<label>ダイレクトメッセージの受信を許可する</label>
-		<input type="checkbox" id="ok_dm_checkbox" name="ok_dm" value="1"><br>
+       	<input type="hidden" name="ok_dm" value="0">
+       	<input type="checkbox" name="ok_dm" value="1"><br>
         
         <input type="submit" value="登録">
     </form>
-    </main>
 </body>
 </html>
 
