@@ -4,9 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>BoaSorte--新規登録</title>
-<link rel="stylesheet" href="<%=request.getContextPath() %>/css/style.css">
+	<meta charset="UTF-8">
+	<title>BoaSorte--新規登録</title>
+	<link rel="stylesheet" href="css/style.css">
 <!-- 郵便番号から住所自動入力のために必要 -->
  <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
 <script>
@@ -37,6 +37,7 @@
 </head>
 <body>
 	<jsp:include page="header.jsp" />
+	<main>
     <h2>アカウント登録フォーム</h2>
     <form action="register" method="post" class="h-adr">
         <label>名前</label>
@@ -80,6 +81,7 @@
         
         <input type="submit" value="登録">
     </form>
+    </main>
 </body>
 </html>
 
