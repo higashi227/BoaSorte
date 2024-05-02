@@ -1,29 +1,38 @@
-<%@ page import="java.util.List, java.util.Map" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List, java.util.Map"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%
+Integer accountId = (Integer) session.getAttribute("account_id");
+%>
+
+
 <!DOCTYPE html>
 <html>
 <jsp:include page="head.jsp">
-    <jsp:param name="pageTitle" value="BoaSorte--ギフト先登録" />
+	<jsp:param name="pageTitle" value="BoaSorte--ギフト先登録" />
 </jsp:include>
 
 <body>
-    <jsp:include page="header.jsp" />
-    
-    <main>
-        <h2>ギフト先登録</h2>
-        <form action="register-gift" method="post">
-            <c:forEach var="i" begin="1" end="5">
-                <h3>ギフト先${i}</h3>
-                <label for="gname${i}">名前:</label>
-                <input type="text" id="gname${i}" name="gname${i}" required /><br>
-                <label for="gpostnum${i}">郵便番号:</label>
-                <input type="text" id="gpostnum${i}" name="gpostnum${i}" required /><br>
-                <label for="gaddress${i}">住所:</label>
-                <input type="text" id="gaddress${i}" name="gaddress${i}" required /><br>
-            </c:forEach>
-            <input type="submit" value="登録する" />
-        </form>
-    </main>
-    <footer> </footer>
+	<jsp:include page="header.jsp" />
+
+	<main>
+		<h2>ギフト先登録</h2>
+		<form action="gift-register" method="post">
+			<label for="gname">名前:</label>
+			<input type="text" id="gname" name="gname" required /><br>
+			
+			<label for="gpostnum">郵便番号:</label>
+			<input type="text" id="gpostnum" name="gpostnum" required onblur="getAddressFromPostcode()" required /><br>
+			
+			<label for="gaddress">住所:</label>
+			<input type="text" id="gaddress" name="gaddress" required /> <br>
+			
+			<input type="submit" value="登録する" />
+		</form>
+
+	</main>
+
+	<footer> </footer>
+	<script src="js/gpostnum.js"></script>
 </body>
 </html>

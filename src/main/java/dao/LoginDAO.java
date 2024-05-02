@@ -39,6 +39,23 @@ public class LoginDAO {
         }
         return status;
     }
+    public int getAccountId(Login login) {
+        int accountId = -1; // デフォルト値はエラーを示すために負の値を設定
+        try (Connection connection = DBUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT account_id FROM account WHERE mail_address = ? AND password = ?")) {
+            preparedStatement.setString(1, login.getMailAddress());
+            preparedStatement.setString(2, hashPassword(login.getPassword()));
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                accountId = resultSet.getInt("account_id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return accountId;
+    }
+
 
     // パスワードをハッシュ化するメソッド
     private String hashPassword(String password) {

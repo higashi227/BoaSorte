@@ -23,13 +23,13 @@ import utils.DBUtil;
 public class EditAccountServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("user") == null) {
+        if (session == null || session.getAttribute("accountId") == null) {
             // 未ログインの場合はログインページにリダイレクト
             response.sendRedirect("login.jsp");
             return;
         }
 
-        String loggedInUser = (String) session.getAttribute("user"); // ログインユーザーのメールアドレスを取得
+        int accountId = (int) session.getAttribute("accountId"); // セッションからアカウントIDを取得
 
         List<Map<String, String>> accounts = new ArrayList<>();
 
@@ -40,8 +40,8 @@ public class EditAccountServlet extends HttpServlet {
         try {
             conn = DBUtil.getConnection();
             System.out.println("データベース接続成功");
-            stmt = conn.prepareStatement("SELECT * FROM boasorte.account WHERE mail_address = ?");
-            stmt.setString(1, loggedInUser);
+            stmt = conn.prepareStatement("SELECT * FROM boasorte.account WHERE account_id = ?");
+            stmt.setInt(1, accountId);
             rs = stmt.executeQuery();
 
             // 結果をリストに格納
