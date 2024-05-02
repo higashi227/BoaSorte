@@ -40,4 +40,44 @@ public class ItemListServlet extends HttpServlet {
         // 商品一覧ページにフォワード
         request.getRequestDispatcher("adminmanagement.jsp").forward(request, response);
     }
+
+   /* protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        // フォームから送られてきた商品情報を取得
+        String name = request.getParameter("name");
+        String priceStr = request.getParameter("price");
+        int price;
+        if (priceStr != null && !priceStr.isEmpty()) {
+            price = Integer.parseInt(priceStr);
+        } else {
+            // エラー処理（価格が指定されていない場合）
+            System.out.println("価格が指定されていません");
+            request.getRequestDispatcher("/error.jsp").forward(request, response);
+            return;
+        }
+        int isCoffee = "1".equals(request.getParameter("is_coffee")) ? 1 : 0; // チェックボックスがチェックされているかをint型で取得
+
+        // 新規登録する備品情報を設定
+        Item newItem = new Item();
+        newItem.setName(name);
+        newItem.setPrice(price);
+        newItem.setIsCoffee(isCoffee);
+
+        // 商品情報をデータベースに追加
+        ItemDAO itemDAO = new ItemDAO();
+        try {
+            ItemDAO.addItem(newItem);
+            List<Item> updatedItems = ItemDAO.getAllItems();
+            request.setAttribute("itemList", updatedItems);
+            response.sendRedirect("ItemListServlet");
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            System.out.println("最後でエラー");
+            request.getRequestDispatcher("/error.jsp").forward(request, response);
+        }
+
+    }*/
 }
+

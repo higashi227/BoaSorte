@@ -28,7 +28,8 @@
 				<td><%= item.getItemId() %></td>
 				<td><%= item.getName() %></td>
 				<td><%= item.getPrice() %></td>
-				<td><%= item.getIsCoffee() == 1 ? "コーヒー" : "コーヒーでない" %></td>
+				<td><%= item.getIsCoffee() == 1 ? "コーヒー" : "お菓子" %></td>
+		
 			</tr>
 			<% 
                     }
@@ -42,10 +43,16 @@
             %>
 		</tbody>
 	</table>
+	
+	
+	
+	<form action="AdminItemEditServlet" method="post">
+	 <input type="hidden" name="edit" value="true">
+	<input type="submit" value="編集へGO">
+	</form> 
+	
 
+	
 
-	<form action="AdminItemEditServlet" method="post" class="form-inline">
-		<input type="submit" value="編集画面へ" class="button-inline">
-	</form>
 </body>
 </html>
