@@ -14,7 +14,6 @@ import model.Item;
 
 @WebServlet("/AdminItemAddServlet")
 public class AdminItemAddServlet extends HttpServlet {
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
