@@ -27,7 +27,7 @@
                 	<td>${gift.gaddress}</td>
             	</tr>
         	</c:forEach>
-    	</table>
+    	</table>		
     	<form action="gift-register.jsp">
         	<button type="submit">ギフト先登録</button>
     	</form>
