@@ -7,7 +7,6 @@
     <jsp:param name="pageTitle" value="BoaSorte--アカウント編集" />
 </jsp:include>
 
-
 <body>
     <jsp:include page="header.jsp" />
     <main>
@@ -32,6 +31,5 @@
     </main>
     <footer> </footer>
     <script src="js/postnum.js"></script>
-    
 </body>
 </html>
