@@ -69,6 +69,9 @@
 		<form action="gift-list">
 			<button type="submit">ギフト先一覧</button>
 		</form>
+		<form action="Logout">
+			<button type="submit">ログアウト</button>
+		</form>
 		
 	</main>
 	<footer> </footer>
