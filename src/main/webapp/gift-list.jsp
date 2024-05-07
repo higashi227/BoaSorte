@@ -14,20 +14,22 @@
         <h2>ギフト一覧</h2>
         <table border="1">
             <tr>
+                <th style="display: none;">ギフトID</th>
                 <th>名前</th>
                 <th>郵便番号</th>
                 <th>住所</th>
-                <th> </th>
+                <th>操作</th>
             </tr>
             <c:forEach var="gift" items="${gifts}">
                 <tr>
+                    <td style="display: none;">${gift.giftId}</td>
                     <td>${gift.gname}</td>
                     <td>${gift.gpostnum}</td>
                     <td>${gift.gaddress}</td>
                     <td>
                         <form id="editForm${gift.giftId}" method="GET" onsubmit="return false;">
                             <input type="hidden" name="giftId" value="${gift.giftId}" />
-                            <button type="button" onclick="showEditForm(${gift.giftId})">編集</button>
+                            <button type="button" onclick="showEditForm(${gift.giftId},'${gift.gname}','${gift.gpostnum}','${gift.gaddress}')">編集</button>
                         </form>
                         <form action="delete-gift" method="POST" onsubmit="return confirm('このギフトを削除しますか？');">
                             <input type="hidden" name="giftId" value="${gift.giftId}" />
@@ -60,7 +62,7 @@
 
     <!-- JavaScript -->
     <script>
-        function showEditForm(giftId) {
+        function showEditForm(giftId, gname, gpostnum, gaddress) {
             // 編集フォームを表示する
             var editForm = document.getElementById("editForm" + giftId);
             var editGiftId = document.getElementById("editGiftId");
@@ -69,9 +71,9 @@
             var editGiftAddress = document.getElementById("editGiftAddress");
 
             editGiftId.value = giftId;
-            editGiftName.value = ""; // 編集前の値を設定する必要があればここで設定
-            editGiftPostnum.value = ""; // 編集前の値を設定する必要があればここで設定
-            editGiftAddress.value = ""; // 編集前の値を設定する必要があればここで設定
+            editGiftName.value = gname;
+            editGiftPostnum.value = gpostnum;
+            editGiftAddress.value = gaddress;
 
             document.getElementById("editFormContainer").style.display = "block";
         }
