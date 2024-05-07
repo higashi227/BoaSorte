@@ -5,9 +5,9 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 
+import dao.CartDAO;
 import dao.OrderDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -43,26 +43,31 @@ public class FinalizePurchaseServlet extends HttpServlet {
         LocalDate currentDate = LocalDate.now();
         Date createdAt = Date.valueOf(currentDate);
 
-        // 商品情報とコーヒー状態を取得
-        Enumeration<String> paramNames = request.getParameterNames();
-        while (paramNames.hasMoreElements()) {
-            String paramName = paramNames.nextElement();
-            if (paramName.startsWith("itemId_")) {
-                int itemId = Integer.parseInt(request.getParameter(paramName));
-                int quantity = Integer.parseInt(request.getParameter("quantity_" + itemId));
-                int price = Integer.parseInt(request.getParameter("price_" + itemId));
-                String coffeeStatus = request.getParameter("coffeeStatus_" + itemId);
+        // 各インデックスに基づいて商品情報とコーヒー状態を取得
+        for (int i = 0; i < 100; i++) { // 100は送信される商品の最大想定数
+            String itemIdKey = "item_" + i + "_itemId";
+            if (request.getParameter(itemIdKey) == null) break; // パラメータが存在しない場合はループ終了
 
-                Order order = new Order(0, accountId, itemId, quantity, price, shippingFee, coffeeStatus, createdAt, null);
-                orders.add(order);
-            }
+            int itemId = Integer.parseInt(request.getParameter(itemIdKey));
+            int quantity = Integer.parseInt(request.getParameter("item_" + i + "_quantity"));
+            int price = Integer.parseInt(request.getParameter("item_" + i + "_price"));
+            int isCoffee = Integer.parseInt(request.getParameter("item_" + i + "_isCoffee"));
+            String coffeeStatus = isCoffee == 1 ? request.getParameter("item_" + i + "_coffeeStatus") : null;
+
+            Order order = new Order(0, accountId, itemId, quantity, price, shippingFee, coffeeStatus, createdAt, null);
+            orders.add(order);
         }
 
         // データベースに保存
         try {
             OrderDAO orderDAO = new OrderDAO();
             orderDAO.saveOrders(orders);
-            response.sendRedirect("success.jsp");
+
+            // カートをクリアする
+            CartDAO cartDAO = new CartDAO();
+            cartDAO.clearCart(accountId);
+
+            response.sendRedirect("purchase-success.jsp");
         } catch (SQLException e) {
             e.printStackTrace();
             response.sendRedirect("purchase.jsp?status=failed");
