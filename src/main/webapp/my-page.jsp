@@ -70,6 +70,10 @@
 			<button type="submit">ギフト先一覧</button>
 		</form>
 		
+		<form action="MinServlet">
+			<input type="submit" value="商品一覧へ" />
+		</form>
+		
 	</main>
 	<footer> </footer>
 </body>

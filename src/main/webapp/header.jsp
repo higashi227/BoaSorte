@@ -8,7 +8,7 @@
 			<ul>
 				<li><a href="register.jsp">会員登録</a></li>
 				<li><a href="my-page">マイページ</a></li>
-				<li><a href="cart.jsp">カート</a></li>
+				<li><a href="CartServlet">カート</a></li>
 			</ul>
 		</nav>
 	</header>
