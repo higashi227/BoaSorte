@@ -5,13 +5,15 @@ public class Cart {
     private int accountId;
     private int itemId;
     private int quantity;
+    private String coffeeStatus;
     
     // Constructor
-    public Cart(int cartId, int accountId, int itemId, int quantity) {
+    public Cart(int cartId, int accountId, int itemId, int quantity, String coffeeStatus) {
         this.cartId = cartId;
         this.accountId = accountId;
         this.itemId = itemId;
         this.quantity = quantity;
+        this.coffeeStatus = coffeeStatus;
     }
 
     // Getters and Setters
@@ -47,7 +49,14 @@ public class Cart {
         this.quantity = quantity;
     }
     
-    // オブジェクト情報を文字列で表示するためのtoStringメソッド
+    public String getCoffeeStatus() {
+        return coffeeStatus;
+    }
+
+    public void setCoffeeStatus(String coffeeStatus) {
+        this.coffeeStatus = coffeeStatus;
+    }
+
     @Override
     public String toString() {
         return "Cart{" +
@@ -55,6 +64,7 @@ public class Cart {
                 ", accountId=" + accountId +
                 ", itemId=" + itemId +
                 ", quantity=" + quantity +
+                ", coffeeStatus='" + coffeeStatus + '\'' +
                 '}';
     }
 }

@@ -1,4 +1,3 @@
-<%--購入手続きページ--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -28,28 +27,22 @@
                         <td>${cartItem.itemId}</td>
                         <td>${cartItem.name}</td>
                         <td>${cartItem.price}</td>
-                <c:forEach var="cartItem" items="${cartItems}" varStatus="status">
-                    <tr>
-                        <td>${cartItem.itemId}</td>
-                        <td>${cartItem.name}</td>
-                        <td>${cartItem.price}</td>
                         <td>${cartItem.quantity}</td>
                         <td>${cartItem.price * cartItem.quantity}</td>
                         <td>
-                            <c:choose>
+                        	 <c:choose>
                                 <c:when test="${cartItem.isCoffee == 1}">
-                                    <select name="coffeeStatus_${cartItem.itemId}">
-                                        <option value="豆のまま">豆のまま</option>
-                                        <option value="細挽き">細挽き</option>
-                                        <option value="中挽き">中挽き</option>
-                                        <option value="粗挽き">粗挽き</option>
-                                    </select>
+                                    <input type="hidden" name="item_${status.index}_itemId" value="${cartItem.itemId}">
+                                    <input type="hidden" name="item_${status.index}_quantity" value="${cartItem.quantity}">
+                                    <input type="hidden" name="item_${status.index}_price" value="${cartItem.price}">
+                                    <input type="hidden" name="item_${status.index}_isCoffee" value="${cartItem.isCoffee}">
+                                    <input type="hidden" name="item_${status.index}_coffeeStatus" value="${cartItem.coffeeStatus}">
+                                    ${cartItem.coffeeStatus}
                                 </c:when>
                                 <c:otherwise>
                                     <span>コーヒーではありません</span>
                                 </c:otherwise>
-                            </c:choose>>
-                       
+                            </c:choose>
                         </td>
                     </tr>
                 </c:forEach>
@@ -61,24 +54,32 @@
                     <td colspan="4" style="text-align: right;"><strong>合計金額:</strong></td>
                     <td colspan="2"><strong>${totalPrice}</strong></td>
                 </tr>
+                <c:if test="${remainingForFreeShipping > 0}">
+                    <tr>
+                        <td colspan="4" style="text-align: right;"><strong>送料無料まで残り:</strong></td>
+                        <td colspan="2"><strong>${remainingForFreeShipping}</strong></td>
+                    </tr>
+                </c:if>
             </tbody>
         </table>
-        <form action="FinalizePurchaseServlet" method="post">
-            <c:forEach var="cartItem" items="${cartItems}">
-                <input type="hidden" name="itemId_${cartItem.itemId}" value="${cartItem.itemId}">
-                <input type="hidden" name="quantity_${cartItem.itemId}" value="${cartItem.quantity}">
-                <input type="hidden" name="price_${cartItem.itemId}" value="${cartItem.price}">
-                <input type="hidden" name="isCoffee_${cartItem.itemId}" value="${cartItem.isCoffee}">
+         <form action="FinalizePurchaseServlet" method="post">
+            <c:forEach var="cartItem" items="${cartItems}" varStatus="status">
+                <input type="hidden" name="item_${status.index}_itemId" value="${cartItem.itemId}">
+                <input type="hidden" name="item_${status.index}_quantity" value="${cartItem.quantity}">
+                <input type="hidden" name="item_${status.index}_price" value="${cartItem.price}">
+                <input type="hidden" name="item_${status.index}_isCoffee" value="${cartItem.isCoffee}">
                 <c:choose>
                     <c:when test="${cartItem.isCoffee == 1}">
-                        <input type="hidden" name="coffeeStatus_${cartItem.itemId}" value="${param['coffeeStatus_' + cartItem.itemId]}">
+                        <input type="hidden" name="item_${status.index}_coffeeStatus" value="${cartItem.coffeeStatus}">
                     </c:when>
                 </c:choose>
             </c:forEach>
             <input type="hidden" name="shippingFee" value="${shippingFee}">
             <input type="submit" value="購入確定" class="button-inline">
         </form>
-        <a href="CartServlet">戻る</a>
+        <form action="CartServlet">
+			<input type="submit" value="戻る" />
+		</form>
     </main>
 </body>
 </html>

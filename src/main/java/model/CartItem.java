@@ -5,36 +5,28 @@ public class CartItem {
     private String name;
     private int price;
     private int quantity;
+    private int isCoffee;
+    private String coffeeStatus;
 
-    public CartItem(int itemId, String name, int price, int quantity) {
+    public CartItem(int itemId, String name, int price, int quantity, int isCoffee, String coffeeStatus) {
         this.itemId = itemId;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
+        this.isCoffee = isCoffee;
+        this.coffeeStatus = coffeeStatus;
     }
 
     public int getItemId() {
         return itemId;
     }
 
-    public void setItemId(int itemId) {
-        this.itemId = itemId;
-    }
-
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getPrice() {
         return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
     }
 
     public int getQuantity() {
@@ -45,6 +37,18 @@ public class CartItem {
         this.quantity = quantity;
     }
 
+    public int getIsCoffee() {
+        return isCoffee;
+    }
+
+    public String getCoffeeStatus() {
+        return coffeeStatus;
+    }
+
+    public void setCoffeeStatus(String coffeeStatus) {
+        this.coffeeStatus = coffeeStatus;
+    }
+
     @Override
     public String toString() {
         return "CartItem{" +
@@ -52,6 +56,8 @@ public class CartItem {
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", quantity=" + quantity +
+                ", isCoffee=" + isCoffee +
+                ", coffeeStatus='" + coffeeStatus + '\'' +
                 '}';
     }
 }

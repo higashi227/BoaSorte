@@ -34,28 +34,27 @@ public class PurchaseServlet extends HttpServlet {
         }
 
         int accountId = (Integer) request.getSession().getAttribute("accountId");
-        int shippingFee = Integer.parseInt(request.getParameter("shippingFee"));
-
         CartDAO cartDAO = new CartDAO();
+        int freeShippingThreshold = 3000;
+        int shippingFee = 650;
+
         try {
             List<CartItem> cartItems = cartDAO.getGroupedCartItemsByAccountId(accountId);
+            int totalPrice = cartItems.stream().mapToInt(item -> item.getPrice() * item.getQuantity()).sum();
 
-            // 合計金額を計算
-            int totalPrice = 0;
-            for (CartItem cartItem : cartItems) {
-                totalPrice += cartItem.getPrice() * cartItem.getQuantity();
+            if (totalPrice >= freeShippingThreshold) {
+                shippingFee = 0;
             }
 
-            // 送料を合計金額に追加
-            totalPrice += shippingFee;
+            int remainingForFreeShipping = Math.max(0, freeShippingThreshold - totalPrice);
 
-            // 購入画面で情報を表示
             request.setAttribute("cartItems", cartItems);
-            request.setAttribute("totalPrice", totalPrice);
+            request.setAttribute("totalPrice", totalPrice + shippingFee);
             request.setAttribute("shippingFee", shippingFee);
+            request.setAttribute("remainingForFreeShipping", remainingForFreeShipping);
+
             RequestDispatcher dispatcher = request.getRequestDispatcher("purchase.jsp");
             dispatcher.forward(request, response);
-
         } catch (SQLException e) {
             e.printStackTrace();
             response.sendRedirect("cart.jsp?status=failed");

@@ -32,10 +32,11 @@ public class RemoveFromCartServlet extends HttpServlet {
 
         int accountId = (Integer) request.getSession().getAttribute("accountId");
         int itemId = Integer.parseInt(request.getParameter("itemId"));
-
+        String coffeeStatus = request.getParameter("coffeeStatus");
+        
         try {
             CartDAO cartDAO = new CartDAO();
-            cartDAO.removeFromCart(accountId, itemId);
+            cartDAO.removeFromCart(accountId, itemId, coffeeStatus);
             response.sendRedirect("CartServlet");
         } catch (SQLException e) {
             response.sendRedirect("cart.jsp?status=failed");

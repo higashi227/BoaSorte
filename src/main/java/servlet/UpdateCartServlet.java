@@ -33,10 +33,11 @@ public class UpdateCartServlet extends HttpServlet {
         int accountId = (Integer) request.getSession().getAttribute("accountId");
         int itemId = Integer.parseInt(request.getParameter("itemId"));
         int quantity = Integer.parseInt(request.getParameter("quantity"));
+        String coffeeStatus = request.getParameter("coffeeStatus");
 
         try {
             CartDAO cartDAO = new CartDAO();
-            cartDAO.updateCartQuantity(accountId, itemId, quantity);
+            cartDAO.updateCartQuantity(accountId, itemId, quantity, coffeeStatus);
             response.sendRedirect("CartServlet");
         } catch (SQLException e) {
             response.sendRedirect("cart.jsp?status=failed");
