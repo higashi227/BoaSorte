@@ -1,61 +1,62 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.sql.*" %>
-<%@ page import="javax.naming.*" %>
-<%@ page import="javax.sql.*" %>
 <%@ page import="utils.DBUtil" %>
+<%@ page import="java.util.List"%>
+<%@ page import="model.Item"%>
 <!DOCTYPE html>
 <html>
 <jsp:include page="head.jsp">
 	<jsp:param name="pageTitle" value="BoaSorte -- TOPページ" />
 </jsp:include>
 <body>
-	
-	<form action="AddToCartServlet" method="post">
-<table border="1">
-    <tr>
-        <th>商品名</th>
-        <th>価格</th>
-        <th>コーヒー</th>
-        <th>数量</th>
-         <th>カートに追加</th>
-    </tr>
+	<jsp:include page="header.jsp" />
+	<main>
+		<table border="1">
+		<thead>
+        	<tr>       		
+				<th scope="auto">品番</th>
+				<th scope="auto">商品名</th>
+				<th scope="auto">金額</th>
+				<th scope="auto">商品内容</th>
+        		<th scope="auto">数量</th>
+         		<th scope="auto">カートに追加</th>
+    		</tr>
+		</thead>
+		<tbody>
+    		<% 
+    			List<Item> itemList = (List<Item>) request.getAttribute("itemList");
+    			if (itemList != null && !itemList.isEmpty()) {
+        			for (Item item : itemList) {
+    		%>
+    		<tr>
+				<form action="CartServlet" method="post">
+					<td><%= item.getItemId() %></td>
+					<td><%= item.getName() %></td>
+					<td><%= item.getPrice() %></td>
+					<td><%= item.getIsCoffee() == 1 ? "コーヒー" : "コーヒーでない" %></td>
+					<td>
+                		<input type="number" name="quantity" min="1" value="1" />
+                		 <input type="hidden" name="itemId" value="<%= item.getItemId() %>" />
+            		</td>		
+            		<td>
+            			
+                		<button type="submit">決定</button>
+            		</td>
+            	</form>
+			</tr>
+			<% 
+                    }
+                } else {
+            %>
+			<tr>
+				<td colspan="4">商品情報がありません</td>
+			</tr>
+			<% 
+                }
+            %>
+		</tbody>
+	</table>
 
-    <% 
-    try {
-        Connection conn = DBUtil.getConnection();
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM boasorte.item");
-
-        while (rs.next()) {
-        	 int id = rs.getInt("item_id");
-            String name = rs.getString("name");
-            int price = rs.getInt("price");
-            int isCoffee = rs.getInt("is_coffee");
-    %>
-    <tr>
-        <td><%= name %></td>
-        <td><%= price %></td>
-        <td><%= (isCoffee == 1) ? "はい" : "いいえ" %></td>
-       <td>
-       		<input type="number" name="quantity_<%= id %>" min="1" value="1">
-       </td>
-       <td>
-            <button type="submit" name="item_id" value="<%= id %>">カートに追加</button>
-       </td>
-    </tr>
-    <% 
-        }
-        rs.close();
-        stmt.close();
-        DBUtil.closeConnection(conn);
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-    %>
-
-</table>
-</form>
-
+</main>
 </body>
 </html>
