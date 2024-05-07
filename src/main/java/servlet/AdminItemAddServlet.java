@@ -43,7 +43,7 @@ public class AdminItemAddServlet extends HttpServlet {
             ItemDAO.addItem(newItem);
             List<Item> updatedItems = ItemDAO.getAllItems();
             request.setAttribute("itemList", updatedItems);
-            response.sendRedirect("ItemListServlet");
+            response.sendRedirect("AdminItemAddServlet");
         } catch (SQLException e) {
             e.printStackTrace();
 

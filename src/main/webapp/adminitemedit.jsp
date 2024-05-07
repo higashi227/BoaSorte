@@ -16,8 +16,8 @@
 				<th scope="auto">商品名</th>
 				<th scope="auto">金額</th>
 				<th scope="auto">商品内容</th>
-				<th scope="auto">編集</th>
 				<th scope="auto">削除</th>
+				
 			</tr>
 		</thead>
 		<tbody>
@@ -31,8 +31,11 @@
 				<td><%= item.getName() %></td>
 				<td><%= item.getPrice() %></td>
 				<td><%= item.getIsCoffee() == 1 ? "コーヒー" : "お菓子" %></td>
-				<td><button onclick="editRow(this)">編集</button></td>
-				<td><button onclick="deleteRow(this)">削除</button></td>
+				<td>
+					<form action="AdminItemDeleteServlet" method="post">
+            			<input type="hidden" name="id" value="<%= item.getItemId() %>">
+            			<input type="submit" value="削除">
+					</form>
 			</tr>
 			<% 
                     }
@@ -47,50 +50,44 @@
 		</tbody>
 	</table>
 
-	<br>
-	<h3>新規登録</h3>
-	<form action="AdminItemAddServlet" method="post">
+	<h3>商品編集</h3>
 
-		<label for="name">商品名:</label> <input type="text" id="name"
-			name="name"><br> <br> <label for="price">価格:</label>
-		<input type="text" id="price" name="price"><br> <br>
-		<label for="is_coffee">コーヒー</label> <input type="checkbox"
-			id="is_coffee" name="is_coffee" value="1"><br> <br>
-		<input type="submit" value="保存">
+	<form action="AdminItemUpdateServlet" method="post">
+	
+		<label>商品IDを選択：</label>
+		
+    		<select name="id">
+        		<% for (Item item : itemList) { %>
+            		<option value="<%= item.getItemId() %>"><%= item.getItemId() %></option>
+        		<% } %>
+    		</select><br>
+    		
+        <label for="name">商品名:</label>
+        
+        <input type="text" id="name" name="name" value="${item.name}">
+        <br>
+        
+        <label for="price">金額:</label>
+        
+        <input type="text" id="price" name="price" value="${item.price}">
+        <br>
+        
+        <label for="is_coffee">コーヒー:</label>
+        
+        <input type="checkbox" id="isCoffee" name="isCoffee" ${item.isCoffee ? 'checked' : ''}>
+        <br>
+        
+        <input type="submit" value="更新">
+	
+			
 	</form>
 	
-	<h3>商品編集</h3>
-	
+	<form action="ItemListServlet" method="get">
+        <input type="submit" value="戻る">
+    </form>
 
 
-	<script type="text/javascript">
-	//行を編集
-		function editRow(button) {
-			var row = button.parentNode.parentNode;
-			var cells = row.getElementsByTagName('td');
 
-			// 各セルについて編集可能なフィールドに変更
-			for (var i = 1; i < cells.length -2; i++) { 
-			var value =cells[i].innerText;
-			cells[i].innerHTML = '<input type="text" value="' + value + '">';
-			}
-
-		// 編集ボタンを「保存」ボタンに切り替え
-		button.innerText = '保存';
-		button.setAttribute('onclick', 'saveRow(this)');
-
-		function saveRow(button) {
-				var row = button.parentNode.parentNode;
-			var inputs = row.getElementsByTagName('input');
-		}
-		//行の削除
-			function deleteRow(button) {
-				var row = button.parentNode.parentNode;
-		    	row.remove();
-				}
-	}
-
-	</script>
 
 
 
