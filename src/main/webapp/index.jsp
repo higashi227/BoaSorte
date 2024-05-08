@@ -15,7 +15,7 @@
 		
 		<main>
 		
-		商品一覧
+		<jsp:include page="all-items.jsp" />
 		</main>
 	
 		<footer> </footer>
