@@ -10,7 +10,7 @@
 	<jsp:include page="header.jsp" />
     <main>
         <table border="1">
-            <caption>【購入確認】</caption>
+            <caption>【購入手続き】</caption>
             <thead>
                 <tr>
                     <th scope="auto">アイテムID</th>
@@ -62,7 +62,12 @@
                 </c:if>
             </tbody>
         </table>
-         <form action="FinalizePurchaseServlet" method="post">
+          <!-- アカウント情報を表示 -->
+        <h3>配送先情報</h3>
+        <p>郵便番号: <strong>${account.postnum}</strong></p>
+        <p>住所: <strong>${account.address}</strong></p>
+
+        <form action="PurchaseConfirmationServlet" method="post">
             <c:forEach var="cartItem" items="${cartItems}" varStatus="status">
                 <input type="hidden" name="item_${status.index}_itemId" value="${cartItem.itemId}">
                 <input type="hidden" name="item_${status.index}_quantity" value="${cartItem.quantity}">
@@ -75,7 +80,18 @@
                 </c:choose>
             </c:forEach>
             <input type="hidden" name="shippingFee" value="${shippingFee}">
-            <input type="submit" value="購入確定" class="button-inline">
+
+			<!-- 支払い方法選択 -->
+            <h3>支払い方法</h3>
+            <label><input type="radio" name="paymentMethod" value="クレジットカード" required> クレジットカード</label><br>
+            <label><input type="radio" name="paymentMethod" value="代引き"> 代引き</label><br>
+            <label><input type="radio" name="paymentMethod" value="銀行振込"> 銀行振込</label><br>
+
+            <!-- 配送日時選択 -->
+            <label for="deliveryDate">配送日時:</label>
+            <input type="date" name="deliveryDate" id="deliveryDate" required>
+
+            <input type="submit" value="購入内容確認" class="button-inline">
         </form>
         <form action="CartServlet">
 			<input type="submit" value="戻る" />
