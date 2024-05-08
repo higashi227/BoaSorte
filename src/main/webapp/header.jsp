@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" session="false" %>
 	<header>
 		<h1 class="logo">
-			<a href="index.jsp">BoaSorte</a>
+			<a href="index">BoaSorte</a>
 		</h1>
 		
 		<nav>
