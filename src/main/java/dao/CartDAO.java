@@ -114,6 +114,8 @@ public class CartDAO {
 	        return cartItems;
 	    }
 	 
+	 
+	 //カートの商品の数量変更
 	 public void updateCartQuantity(int accountId, int itemId, int quantity, String coffeeStatus) throws SQLException {
 		    Connection conn = null;
 		    PreparedStatement stmt = null;
@@ -132,6 +134,7 @@ public class CartDAO {
 		    }
 		}
 
+	 	//カートの商品を削除する
 	    public void removeFromCart(int accountId, int itemId, String coffeeStatus) throws SQLException {
 	        Connection conn = null;
 	        PreparedStatement stmt = null;

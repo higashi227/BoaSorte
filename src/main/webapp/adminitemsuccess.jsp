@@ -11,7 +11,9 @@
 	
 	<h1>商品の編集が完了しました</h1>
 	
-	<a href="adminmanagement.jsp">管理者ページに戻る</a>
+
+	<a href="ItemListServlet">管理者ページに戻る</a>
+
 </body>
 
 </html>

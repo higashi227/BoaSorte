@@ -33,9 +33,10 @@
 				<td><%= item.getIsCoffee() == 1 ? "コーヒー" : "お菓子" %></td>
 				<td>
 					<form action="AdminItemDeleteServlet" method="post">
-            			<input type="hidden" name="id" value="<%= item.getItemId() %>">
+            			<input type="hidden" name="id" value="value="<%= item.getItemId() %>">
             			<input type="submit" value="削除">
 					</form>
+					 
 			</tr>
 			<% 
                     }
@@ -51,36 +52,33 @@
 	</table>
 
 	<h3>商品編集</h3>
-
+	
+	
+<div style = "display:none";>
 	<form action="AdminItemUpdateServlet" method="post">
 	
 		<label>商品IDを選択：</label>
 		
-    		<select name="id">
+    		<select type =" hidden" name="id">
         		<% for (Item item : itemList) { %>
             		<option value="<%= item.getItemId() %>"><%= item.getItemId() %></option>
         		<% } %>
     		</select><br>
     		
         <label for="name">商品名:</label>
-        
         <input type="text" id="name" name="name" value="${item.name}">
         <br>
-        
         <label for="price">金額:</label>
-        
         <input type="text" id="price" name="price" value="${item.price}">
         <br>
-        
         <label for="is_coffee">コーヒー:</label>
-        
         <input type="checkbox" id="isCoffee" name="isCoffee" ${item.isCoffee ? 'checked' : ''}>
         <br>
-        
         <input type="submit" value="更新">
-	
-			
+        	
 	</form>
+	
+	</div>
 	
 	<form action="ItemListServlet" method="get">
         <input type="submit" value="戻る">

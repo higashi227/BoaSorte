@@ -14,14 +14,14 @@ import jakarta.servlet.http.HttpServletResponse;
 public class AdminItemDeleteServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
+    	   int id = Integer.parseInt(request.getParameter("id"));
 
-        try {
-            ItemDAO.deleteItem(id);
-            response.sendRedirect("adminitemsuccess.jsp"); // 成功した場合はsuccess.jspにリダイレクトします
-        } catch (SQLException e) {
-            e.printStackTrace();
-            response.sendRedirect("error.jsp"); // 失敗した場合はerror.jspにリダイレクトします
-        }
-    }
-}
+           try {
+               ItemDAO.deleteItem(id);
+               response.sendRedirect("adminitemsuccess.jsp"); // 成功した場合はsuccess.jspにリダイレクトします
+           } catch (SQLException e) {
+               e.printStackTrace();
+               response.sendRedirect("error.jsp"); // 失敗した場合はerror.jspにリダイレクトします
+           }
+       }
+   } 
