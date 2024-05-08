@@ -1,8 +1,13 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import dao.CartDAO;
 import jakarta.servlet.RequestDispatcher;
@@ -13,6 +18,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.CartItem;
+import utils.DBUtil;
 
 @WebServlet("/PurchaseServlet")
 public class PurchaseServlet extends HttpServlet {
@@ -38,7 +44,23 @@ public class PurchaseServlet extends HttpServlet {
         int freeShippingThreshold = 3000;
         int shippingFee = 650;
 
+        // アカウント情報の取得
+        Map<String, String> account = new HashMap<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
         try {
+            conn = DBUtil.getConnection();
+            stmt = conn.prepareStatement("SELECT postnum, address FROM boasorte.account WHERE account_id = ?");
+            stmt.setInt(1, accountId);
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                account.put("postnum", rs.getString("postnum"));
+                account.put("address", rs.getString("address"));
+            }
+
             List<CartItem> cartItems = cartDAO.getGroupedCartItemsByAccountId(accountId);
             int totalPrice = cartItems.stream().mapToInt(item -> item.getPrice() * item.getQuantity()).sum();
 
@@ -52,12 +74,15 @@ public class PurchaseServlet extends HttpServlet {
             request.setAttribute("totalPrice", totalPrice + shippingFee);
             request.setAttribute("shippingFee", shippingFee);
             request.setAttribute("remainingForFreeShipping", remainingForFreeShipping);
+            request.setAttribute("account", account);
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("purchase.jsp");
             dispatcher.forward(request, response);
         } catch (SQLException e) {
             e.printStackTrace();
             response.sendRedirect("cart.jsp?status=failed");
+        } finally {
+            DBUtil.closeResources(conn, stmt, rs);
         }
     }
 }

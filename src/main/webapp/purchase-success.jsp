@@ -8,6 +8,7 @@
 	<jsp:param name="pageTitle" value="BoaSorte--購入完了" />
 </jsp:include>
 <body>
-
+<caption>【購入完了】</caption>
+    <p>購入が完了しました。</p>
 </body>
 </html>

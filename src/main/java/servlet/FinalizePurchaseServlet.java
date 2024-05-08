@@ -9,6 +9,7 @@ import java.util.List;
 
 import dao.CartDAO;
 import dao.OrderDAO;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -38,6 +39,7 @@ public class FinalizePurchaseServlet extends HttpServlet {
 
         int accountId = (Integer) request.getSession().getAttribute("accountId");
         int shippingFee = Integer.parseInt(request.getParameter("shippingFee"));
+        String deliveryDate = request.getParameter("deliveryDate");
 
         List<Order> orders = new ArrayList<>();
         LocalDate currentDate = LocalDate.now();
@@ -66,8 +68,16 @@ public class FinalizePurchaseServlet extends HttpServlet {
             // カートをクリアする
             CartDAO cartDAO = new CartDAO();
             cartDAO.clearCart(accountId);
-
-            response.sendRedirect("purchase-success.jsp");
+            
+            // 成功ページに配送日を渡す
+         // 成功ページに配送日を渡す
+            request.setAttribute("deliveryDate", deliveryDate);
+            request.setAttribute("cartItems", orders); // 注文されたアイテムリストを表示用に再利用
+            request.setAttribute("shippingFee", shippingFee);
+            int totalPrice = orders.stream().mapToInt(order -> order.getPrice() * order.getQuantity()).sum();
+            request.setAttribute("totalPrice", totalPrice);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("purchase-success.jsp");
+            dispatcher.forward(request, response);
         } catch (SQLException e) {
             e.printStackTrace();
             response.sendRedirect("purchase.jsp?status=failed");

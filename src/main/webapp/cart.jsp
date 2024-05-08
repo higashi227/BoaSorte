@@ -60,7 +60,7 @@
 		</tbody>
 	</table>
 	<form action="PurchaseServlet" method="post" class="form-inline">
-		<input type="submit" value="購入" class="button-inline">
+		<input type="submit" value="購入手続き" class="button-inline">
 	</form>
 	<form action="MinServlet">
 		<input type="submit" value="商品一覧へ" />
