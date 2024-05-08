@@ -82,9 +82,10 @@ public class ItemDAO {
 
 
 	//商品を編集するメソッド
-	public static void updateItem(Item item) throws SQLException {
+	public static boolean updateItem(Item item) throws SQLException {
 		Connection conn = null;
 		PreparedStatement stmt = null;
+		boolean success = false;
 
 		try {
 			conn = DBUtil.getConnection(); // DB接続
@@ -97,21 +98,90 @@ public class ItemDAO {
 			stmt.setString(1, item.getName());
 			stmt.setInt(2, item.getPrice());
 			stmt.setInt(3, item.getIsCoffee());
+			stmt.setInt(4, item.getItemId()); // item_idを設定
 
 			// クエリを実行
-			stmt.executeUpdate();
+			int rowsAffected = stmt.executeUpdate();
+			
+			// 更新が成功したかどうかを判定
+			success = rowsAffected > 0;
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw e; // SQLExceptionを再スローする
+			
 		} finally {
 			// リソースの解放
 			DBUtil.closeResources(conn, stmt, null);
 		}
+		return success;
 	}
+	
+	
+		// 商品IDを指定して商品情報を取得するメソッド
+		public static Item getItemById(int itemId) throws SQLException {
+		    Connection conn = null;
+		    PreparedStatement stmt = null;
+		    ResultSet rs = null;
+		    Item item = null;
+
+		    try {
+		        conn = DBUtil.getConnection(); // DB接続
+
+		        // SQLクエリを定義
+		        String sql = "SELECT * FROM boasorte.item WHERE item_id = ?";
+
+		        // ステートメントを作成
+		        stmt = conn.prepareStatement(sql);
+		        stmt.setInt(1, itemId);
+
+		        // クエリを実行し、結果を取得
+		        rs = stmt.executeQuery();
+
+		        // 結果セットから商品情報を取得
+		        if (rs.next()) {
+		            String name = rs.getString("name");
+		            int price = rs.getInt("price");
+		            int isCoffee = rs.getInt("is_coffee");
+		            item = new Item(itemId, name, price, isCoffee);
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		        throw e; // SQLExceptionを再スローする
+		    } finally {
+		        // リソースの解放
+		        DBUtil.closeResources(conn, stmt, rs);
+		    }
+
+		    return item;
+		}
+
+		// 商品を削除するメソッド
+		public static void deleteItem(int itemId) throws SQLException {
+		    Connection conn = null;
+		    PreparedStatement stmt = null;
+
+		    try {
+		        conn = DBUtil.getConnection(); // DB接続
+
+		        // SQLクエリを定義
+		        String sql = "DELETE FROM boasorte.item WHERE item_id = ?";
+
+		        // ステートメントを作成
+		        stmt = conn.prepareStatement(sql);
+		        stmt.setInt(1, itemId);
+
+		        // クエリを実行
+		        stmt.executeUpdate();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		        throw e; // SQLExceptionを再スローする
+		    } finally {
+		        // リソースの解放
+		        DBUtil.closeResources(conn, stmt, null);
+		    }
+		}
 
 
-	public static Item getItemById(int itemId) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
+
 }

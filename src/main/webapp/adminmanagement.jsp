@@ -44,11 +44,18 @@
 		</tbody>
 	</table>
 	
+	<form action="AdminItemNewServlet" method="post">
+	 <input type="hidden" name="add" value="true">
+	<input type="submit" value="商品新規登録">
+	</form> 
+	
+	
+	
 	
 	
 	<form action="AdminItemEditServlet" method="post">
 	 <input type="hidden" name="edit" value="true">
-	<input type="submit" value="編集へGO">
+	<input type="submit" value="商品編集・削除">
 	</form> 
 	
 
