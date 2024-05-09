@@ -20,7 +20,8 @@ public class AdminItemUpdateServlet extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("id"));
             String name = request.getParameter("name");
             int price = Integer.parseInt(request.getParameter("price"));
-            int isCoffee = Integer.parseInt(request.getParameter("is_coffee"));
+            
+            int isCoffee = request.getParameter("is_coffee") != null ? 1 : 0;
 
             // 更新された情報を持つItemオブジェクトを作成
             Item item = new Item(id, name, price, isCoffee);
