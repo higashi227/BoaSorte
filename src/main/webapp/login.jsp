@@ -9,10 +9,13 @@
 	<jsp:include page="header.jsp" />
 	<main>
 		<form action="Login" method="post">
-			メールアドレス
-			<input type="text" name="mailAddress">
-			パスワード
-			<input type="password" name="password">
+			<h2>ログイン</h2>
+			<label>メールアドレス</label><br>
+			<input type="text" name="mailAddress"><br>
+			
+			<label>パスワード</label><br>
+			<input type="password" name="password"><br>
+			
 			<input type="submit" value="ログイン">
 		</form>
 	</main>

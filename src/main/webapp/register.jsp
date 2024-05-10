@@ -32,14 +32,14 @@
         }
         return true;
     }
-    
 </script>
 </head>
 <body>
 	<jsp:include page="header.jsp" />
 	<main>
-    <h2>アカウント登録フォーム</h2>
     <form action="register" method="post" class="h-adr">
+        <h2>アカウント登録フォーム</h2>
+        
         <label>名前</label>
         <input type="text" name="name" required><br>
         
