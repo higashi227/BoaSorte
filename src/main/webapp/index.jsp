@@ -19,6 +19,7 @@
 		</main>
 	
 		<footer> </footer>
-	
+
+	<script src="js/all-items.js"></script>
 	</body>
 </html>

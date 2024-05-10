@@ -79,6 +79,18 @@ main {
 .main-content {
     margin: 20px;
 }
+.all-items-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 要素間のスペースを均等に配置 */
+}
+
+.all-items-top h2,
+.all-items-top form {
+    display: inline-block; /* form要素を横並びにするためにinline-blockに変更 */
+}
+
+
 .item-tiles {
     display: flex;
     flex-wrap: wrap;
@@ -96,6 +108,7 @@ main {
     width: 100%;
     height: auto;
     border-radius: 5px;
+    aspect-ratio: 4 / 3;
 }
 .item-details {
     padding: 10px;
