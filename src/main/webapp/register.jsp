@@ -3,42 +3,14 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8">
-	<title>BoaSorte--新規登録</title>
-	<link rel="stylesheet" href="css/style.css">
-<!-- 郵便番号から住所自動入力のために必要 -->
-<script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
-<script>
-    function checkPasswordMatch() {
-        var password = document.getElementById("password").value;
-        var confirmPassword = document.getElementById("pass_confirmation").value;
-        var message = document.getElementById("confirmMessage");
-        if (password != confirmPassword) {
-            message.innerHTML = "パスワードが一致しません";
-            message.style.color = "red";
-        } else {
-            message.innerHTML = "";
-        }
-    }
-    
-    function validateForm() {
-        var password = document.getElementById("password").value;
-        var confirmPassword = document.getElementById("pass_confirmation").value;
-        if (password != confirmPassword) {
-            document.getElementById("confirmMessage").innerHTML = "パスワードが一致しません";
-            document.getElementById("confirmMessage").style.color = "red";
-            return false;
-        }
-        return true;
-    }
-</script>
-</head>
+<jsp:include page="head.jsp">
+	<jsp:param name="pageTitle" value="BoaSorte--会員登録" />
+</jsp:include>
 <body>
 	<jsp:include page="header.jsp" />
 	<main>
     <form action="register" method="post" class="h-adr">
-        <h2>アカウント登録フォーム</h2>
+        <h2>会員登録</h2>
         
         <label>名前</label>
         <input type="text" name="name" required><br>
@@ -82,6 +54,32 @@
         <input type="submit" value="登録">
     </form>
     </main>
+    
+    <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
+	<script>
+	    function checkPasswordMatch() {
+	        var password = document.getElementById("password").value;
+	        var confirmPassword = document.getElementById("pass_confirmation").value;
+	        var message = document.getElementById("confirmMessage");
+	        if (password != confirmPassword) {
+	            message.innerHTML = "パスワードが一致しません";
+	            message.style.color = "red";
+	        } else {
+	            message.innerHTML = "";
+	        }
+	    }
+	    
+	    function validateForm() {
+	        var password = document.getElementById("password").value;
+	        var confirmPassword = document.getElementById("pass_confirmation").value;
+	        if (password != confirmPassword) {
+	            document.getElementById("confirmMessage").innerHTML = "パスワードが一致しません";
+	            document.getElementById("confirmMessage").style.color = "red";
+	            return false;
+	        }
+	        return true;
+	    }
+	</script>
 </body>
 </html>
 

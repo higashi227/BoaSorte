@@ -36,6 +36,11 @@ header a {
     text-decoration: none;
     color: #fff;
 }
+
+header h1{
+	color: #ffffff;
+}
+
 main {
     padding-top: 100px;
 }
@@ -47,6 +52,17 @@ h1 {
     font-size: 2rem;
 }
 
+button {
+	background-color:#00A862;
+	border-radius: 100vh;
+	color: #fff;
+	padding: 8px 16px;
+	border: 0;
+}
+
+button:hover {
+	background-color: #0acc7b;
+}
 
 /* メニュー用 */
 .gnav-list {
