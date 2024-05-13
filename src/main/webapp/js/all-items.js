@@ -1,5 +1,3 @@
-// index.js
-
 window.onload = function() {
     var itemsUrl = "/BoaSorte/index"; // 商品データを取得するURL
 
@@ -31,11 +29,11 @@ function displayItems(items) {
         var itemDetails = document.createElement('div');
         itemDetails.classList.add('item-details');
         
-        var itemName = document.createElement('h2');
+        var itemName = document.createElement('h3');
         itemName.textContent = item.name;
         
         var itemPrice = document.createElement('p');
-        itemPrice.textContent = 'Price: ' + item.price;
+        itemPrice.textContent = 'Price: ' + item.price + '円(税別)';
         
         var itemType = document.createElement('p');
         itemType.textContent = item.isCoffee ? 'Coffee' : 'Foods';

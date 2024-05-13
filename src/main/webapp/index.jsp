@@ -16,6 +16,7 @@
 		<main>
 		
 		<jsp:include page="all-items.jsp" />
+		
 		</main>
 	
 		<footer> </footer>

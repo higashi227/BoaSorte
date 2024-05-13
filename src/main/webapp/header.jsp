@@ -4,11 +4,11 @@
 			<a href="/BoaSorte">BoaSorte</a>
 		</h1>
 		
-		<nav>
-			<ul>
-				<li><a href="register.jsp">会員登録</a></li>
-				<li><a href="my-page">マイページ</a></li>
-				<li><a href="CartServlet">カート</a></li>
+		<nav class="gnav">
+			<ul class="gnav-list">
+				<li class="gnav-item"><a href="register.jsp">会員登録</a></li>
+				<li class="gnav-item"><a href="my-page">マイページ</a></li>
+				<li class="gnav-item"><a href="CartServlet">カート</a></li>
 			</ul>
 		</nav>
 	</header>
