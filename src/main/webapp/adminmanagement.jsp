@@ -31,28 +31,28 @@
 			</tr>
 		</thead>
 		<tbody>
-			<% 
-                List<Item> itemList = (List<Item>) request.getAttribute("itemList");
-                if (itemList != null && !itemList.isEmpty()) {
-                    for (Item item : itemList) {
-            %>
+			<%
+			List<Item> itemList = (List<Item>) request.getAttribute("itemList");
+			if (itemList != null && !itemList.isEmpty()) {
+				for (Item item : itemList) {
+			%>
 			<tr>
-				<td><%= item.getItemId() %></td>
-				<td><%= item.getName() %></td>
-				<td><%= item.getPrice() %></td>
-				<td><%= item.getIsCoffee() == 1 ? "コーヒー" : "お菓子" %></td>
+				<td><%=item.getItemId()%></td>
+				<td><%=item.getName()%></td>
+				<td><%=item.getPrice()%></td>
+				<td><%=item.getIsCoffee() == 1 ? "コーヒー" : "お菓子"%></td>
 
 			</tr>
-			<% 
-                    }
-                } else {
-            %>
+			<%
+			}
+			} else {
+			%>
 			<tr>
 				<td colspan="4">商品情報がありません</td>
 			</tr>
-			<% 
-                }
-            %>
+			<%
+			}
+			%>
 		</tbody>
 	</table>
 
@@ -69,23 +69,113 @@
 		<input type="hidden" name="edit" value="true"> <input
 			type="submit" value="商品編集・削除">
 	</form>
+	
+	<%
+    List<Object[]> referralCounts = (List<Object[]>) request.getAttribute("referralCounts");
+    if (referralCounts != null && !referralCounts.isEmpty()) {
+        for (Object[] data : referralCounts) {
+            String recognition = (String) data[0];
+            int count = (int) data[1];
+%>
+            <p>Recognition: <%= recognition %>, Count: <%= count %></p>
+<%
+        }
+    } else {
+%>
+        <p>No referral counts available.</p>
+<%
+    }
+%>
 
-
-
-	<div style="" "400" height="400">
-		<canvas id="referralChart"></canvas>
+	<%--// サイトを知ったかの集計結果を円グラフで表示
+	<div style="width: 400px">
+		<canvas id="mychart-pie"></canvas>
 	</div>
 
-	<div style="" "400" height="400">
-		<canvas id="purchaseChart" width="400" height="400"></canvas>
-	</div>
-
-	<div style="" "400" height="400">
-		<canvas id="regionChart" width="400" height="400"></canvas>
+	 <script>
+		var ctx = document.getElementById('mychart-pie');
+		var myChart = new Chart(ctx, {
+			type : 'pie',
+			data : {
+				labels : [ 'Red', 'Green', 'Blue' ],
+				datasets : [ {
+					data : [ 10, 20, 30 ],
+					backgroundColor : [ '#f88', '#484', '#48f' ],
+					weight : 100,
+				} ],
+			},
+		});
+	</script>
+	
+	// 商品の購入回数の集計結果を棒グラフで表示
+	<div style="width: 400px">
+		<canvas id="mychart-bar"></canvas>
 	</div>
 
 	<script>
-    	// サイトを知ったかの集計結果を円グラフで表示
+		var ctx = document.getElementById('mychart-bar');
+		var myChart = new Chart(ctx, {
+			type : 'bar',
+			data : {
+				labels : [ 'Sun', 'Mon', 'Tue' ],
+				datasets : [ {
+					label : 'Red',
+					data : [ 25, 35, 40 ],
+					backgroundColor : '#f88',
+				}, {
+					label : 'Green',
+					data : [ 20, 10, 30 ],
+					backgroundColor : '#484',
+				}, {
+					label : 'Blue',
+					data : [ 30, 20, 15 ],
+					backgroundColor : '#48f',
+				} ],
+			},
+		});
+	</script>
+	
+	//商品の購入を地域別に表示
+
+	<div style="width: 400px">
+		<canvas id="mychart"></canvas>
+	</div>
+
+	<script>
+		var ctx = document.getElementById('mychart');
+		var myChart = new Chart(ctx, {
+			type : 'line',
+			data : {
+				labels : [ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ],
+				datasets : [ {
+					label : 'Red',
+					data : [ 20, 35, 40, 30, 45, 35, 40 ],
+					borderColor : '#f88',
+				}, {
+					label : 'Green',
+					data : [ 20, 15, 30, 25, 30, 40, 35 ],
+					borderColor : '#484',
+				}, {
+					label : 'Blue',
+					data : [ 30, 25, 10, 5, 25, 30, 20 ],
+					borderColor : '#48f',
+				} ],
+			},
+			options : {
+				y : {
+					min : 0,
+					max : 60,
+				},
+			},
+		});
+	</script>
+
+
+
+	<%-- <div style="" "400" height="400">
+		<canvas id="referralChart"></canvas>
+		<script>
+		// サイトを知ったかの集計結果を円グラフで表示
     	var referralCounts = <c:out value="${referralCounts}" />;
     	var referralLabels = [];
     	var referralData = [];
@@ -115,9 +205,14 @@
         	options: {
             	responsive: true
         	}
-    	});
+    	});</script>
+    	
+	</div>
 
-    	// 商品の購入回数の集計結果を棒グラフで表示
+	<div style="" "400" height="400">
+		<canvas id="purchaseChart" width="400" height="400"></canvas>
+		<script>
+		// 商品の購入回数の集計結果を棒グラフで表示
     	var purchaseCounts = <c:out value="${purchaseCounts}" />;
     	var purchaseLabels = [];
     	var purchaseData = [];
@@ -147,8 +242,17 @@
                 	}
             	}
         	}
-    	});
+    	});</script>
+		
+	</div>
 
+	<div style="" "400" height="400">
+		<canvas id="regionChart" width="400" height="400"></canvas>
+		
+		<script>
+    	
+
+    	
  		// サーブレットから受け取った regionCounts を JavaScript 変数に設定
     	var regionCounts = <c:out value="${regionCounts}" />;
     	var labels = [];
@@ -181,41 +285,9 @@
         	}
     	});
 	</script>
+	</div>--%>
 
 
-
-	<%--<% String[] array = (String[])request.getAttribute("referralCounts"); %>
-<script>
-var jsArray = [<% for (int i = 0; i < array.length; i++ ) {
-    if ( i != 0 ) {
-        out.print(",");
-    }
-        out.print(""" + array[i] + """);
-    }
-  %>];
-</script>
-
-
-
-	<%--<div style="width: 400px">
-		<canvas id="referral_chart"></canvas>
-	</div>
-
-	
-	<script>
-		var ctx = document.getElementById('referral_chart');
-		var myChart = new Chart(ctx, {
-  		type: 'pie',
-  		data: {
-    	labels: ['検索エンジンで検索', '知人からの紹介', 'テレビ', 'SNS'],
-    	datasets: [{
-      	data: [20, 35, 40, 30],
-      	backgroundColor: ['#f88', '#484', '#48f','#00ff00'],
-      	weight: 100,
-    		}], 
-    	},
-	});
-	</script> --%>
 
 </body>
 </html>
