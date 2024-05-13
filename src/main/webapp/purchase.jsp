@@ -25,6 +25,41 @@
         // 配送日入力フィールドに最小日付を設定
         document.getElementById("deliveryDate").setAttribute("min", minDate);
     });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        var deliveryAddressRadios = document.querySelectorAll('input[name="deliveryAddress"]');
+        deliveryAddressRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                updateHiddenFields(this.value);
+            });
+        });
+    });
+    function updateHiddenFields(selectedValue) {
+        var fullName, fullPostnum, fullAddress;
+        if (selectedValue.startsWith("gift_")) {
+            var index = selectedValue.split("_")[1];
+            var nameElement = document.getElementById("gift_" + index + "_name");
+            var postnumElement = document.getElementById("gift_" + index + "_postnum");
+            var addressElement = document.getElementById("gift_" + index + "_address");
+
+            fullName = nameElement ? nameElement.value : '';
+            fullPostnum = postnumElement ? postnumElement.value : '';
+            fullAddress = addressElement ? addressElement.value : '';
+        } else if (selectedValue === "account") {
+            fullName = document.getElementById("accountName") ? document.getElementById("accountName").value : '';
+            fullPostnum = document.getElementById("accountPostnum") ? document.getElementById("accountPostnum").value : '';
+            fullAddress = document.getElementById("accountAddress") ? document.getElementById("accountAddress").value : '';
+        } else {
+            fullName = '';
+            fullPostnum = '';
+            fullAddress = '';
+        }
+
+        var selectedAddressInput = document.getElementById("selectedAddress");
+        if(selectedAddressInput) {
+            selectedAddressInput.value = fullName + " (" + fullPostnum + ", " + fullAddress + ")";
+        }
+    }
 </script>
 	<jsp:include page="header.jsp" />
 	<main>
@@ -102,17 +137,21 @@
                     <input type="radio" name="deliveryAddress" value="account">
                     ${account.name} (${account.postnum}, ${account.address})
                 </label><br>
-          		<c:forEach var="gift" items="${gifts}">	
-                    <label>
-                         <input type="radio" name="deliveryAddress" value="gift_${gift.giftId}">
-                        ${gift.gname} (${gift.gpostnum}, ${gift.gaddress})
-                    </label><br>
-               </c:forEach>
+          		<c:forEach var="gift" items="${gifts}" varStatus="status">
+    				<label>
+        				<input type="radio" name="deliveryAddress" value="gift_${status.index}">
+        				${gift.gname} (${gift.gpostnum}, ${gift.gaddress})
+        				<input type="hidden" id="gift_${status.index}_name" value="${gift.gname}">
+        				<input type="hidden" id="gift_${status.index}_postnum" value="${gift.gpostnum}">
+        				<input type="hidden" id="gift_${status.index}_address" value="${gift.gaddress}">
+    				</label><br>
+				</c:forEach>
             </fieldset>
 
             <!-- カート情報を再送信 -->
             <c:forEach var="cartItem" items="${cartItems}" varStatus="status">
                 <input type="hidden" name="item_${status.index}_itemId" value="${cartItem.itemId}">
+                <input type="hidden" name="item_${status.index}_name" value="${cartItem.name}">
                 <input type="hidden" name="item_${status.index}_quantity" value="${cartItem.quantity}">
                 <input type="hidden" name="item_${status.index}_price" value="${cartItem.price}">
                 <input type="hidden" name="item_${status.index}_isCoffee" value="${cartItem.isCoffee}">
@@ -127,13 +166,20 @@
             </c:forEach>
             <input type="hidden" name="shippingFee" value="${shippingFee}">
             <input type="hidden" name="tax" value="${tax}">
-            <input type="hidden" name="totalAmount" value="${totalPrice + tax + shippingFee}">
+            <input type="hidden" name="totalAmount" value="${totalPrice +shippingFee}">
 
             <!-- 支払い方法選択 -->
             <h3>支払い方法</h3>
             <label><input type="radio" name="paymentMethod" value="クレジットカード" required> クレジットカード</label><br>
             <label><input type="radio" name="paymentMethod" value="代引き"> 代引き</label><br>
             <label><input type="radio" name="paymentMethod" value="銀行振込"> 銀行振込</label><br>
+
+
+			<!-- 配送先アカウント情報の隠しフィールド -->
+			<input type="hidden" id="selectedAddress" name="selectedAddress"  value="${selectedAddress}">
+			<input type="hidden" id="accountName" value="${account.name}">
+			<input type="hidden" id="accountPostnum" value="${account.postnum}">
+			<input type="hidden" id="accountAddress" value="${account.address}">
 
             <!-- 配送日時選択 -->
             <label for="deliveryDate">配送日時:</label>
