@@ -70,6 +70,10 @@
 			<button type="submit">商品一覧へ</button>
 		</form>
 		
+		<form action="OrderHistoryServlet">
+			<button type="submit">購入履歴一覧へ</button>
+		</form>
+		
 		<form action="Logout">
 			<button type="submit">ログアウト</button>
 		</form>
