@@ -37,6 +37,9 @@ public class CartServlet extends HttpServlet {
     	int itemId = Integer.parseInt(request.getParameter("itemId")); // "itemId" パラメータを取得
         int quantity = Integer.parseInt(request.getParameter("quantity"));
         String coffeeStatus = request.getParameter("coffeeStatus");
+        if (coffeeStatus == null) {
+        	coffeeStatus = "0";
+		}
         try {
             CartDAO cartDAO = new CartDAO();
             cartDAO.addOrUpdateCart(accountId, itemId, quantity, coffeeStatus);

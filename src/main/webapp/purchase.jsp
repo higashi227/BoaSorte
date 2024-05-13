@@ -1,30 +1,49 @@
+<%@ page import="java.util.List"%>
+<%@ page import="model.Gift"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <jsp:include page="head.jsp">
     <jsp:param name="pageTitle" value="BoaSorte--購入手続き" />
 </jsp:include>
 <body>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // 今日の日付から2日後の日付を取得
+        var today = new Date();
+        today.setDate(today.getDate() + 2);
+        
+        // YYYY-MM-DD の形式にフォーマット
+        var year = today.getFullYear();
+        var month = ("0" + (today.getMonth() + 1)).slice(-2);
+        var day = ("0" + today.getDate()).slice(-2);
+        var minDate = year + "-" + month + "-" + day;
+
+        // 配送日入力フィールドに最小日付を設定
+        document.getElementById("deliveryDate").setAttribute("min", minDate);
+    });
+</script>
 	<jsp:include page="header.jsp" />
-    <main>
+	<main>
         <table border="1">
             <caption>【購入手続き】</caption>
             <thead>
                 <tr>
-                    <th scope="auto">アイテムID</th>
+                    
                     <th scope="auto">アイテム名</th>
                     <th scope="auto">価格</th>
                     <th scope="auto">数量</th>
                     <th scope="auto">小計</th>
-                    <th scope="auto">コーヒーの状態</th>
+                    <th scope="auto">アイテムの状態</th>
                 </tr>
             </thead>
             <tbody>
                 <c:forEach var="cartItem" items="${cartItems}" varStatus="status">
                     <tr>
-                        <td>${cartItem.itemId}</td>
+                        
                         <td>${cartItem.name}</td>
                         <td>${cartItem.price}</td>
                         <td>${cartItem.quantity}</td>
@@ -40,19 +59,31 @@
                                     ${cartItem.coffeeStatus}
                                 </c:when>
                                 <c:otherwise>
-                                    <span>コーヒーではありません</span>
+                                    <input type="hidden" name="item_${status.index}_itemId" value="${cartItem.itemId}">
+                                    <input type="hidden" name="item_${status.index}_quantity" value="${cartItem.quantity}">
+                                    <input type="hidden" name="item_${status.index}_price" value="${cartItem.price}">
+                                    <input type="hidden" name="item_${status.index}_isCoffee" value="${cartItem.isCoffee}">
+                                    <input type="hidden" name="item_${status.index}_coffeeStatus" value="お菓子">
+                                    <span>お菓子</span>
                                 </c:otherwise>
                             </c:choose>
                         </td>
                     </tr>
                 </c:forEach>
-                <tr>
+                <c:set var="taxDecimal" value="${totalPrice * 0.1}" />
+				<c:set var="tax" value="${fn:substringBefore(taxDecimal, '.')}" />
+				<tr>
+                	<td colspan="4" style="text-align: right;"><strong>税（10%）:</strong></td>
+                	<td><strong>${tax}</strong></td>
+                	<td></td>
+            	</tr>
+                 <tr>
                     <td colspan="4" style="text-align: right;"><strong>送料:</strong></td>
                     <td colspan="2"><strong>${shippingFee}</strong></td>
                 </tr>
                 <tr>
                     <td colspan="4" style="text-align: right;"><strong>合計金額:</strong></td>
-                    <td colspan="2"><strong>${totalPrice}</strong></td>
+                    <td colspan="2"><strong>${totalPrice + tax}</strong></td>
                 </tr>
                 <c:if test="${remainingForFreeShipping > 0}">
                     <tr>
@@ -62,12 +93,24 @@
                 </c:if>
             </tbody>
         </table>
-          <!-- アカウント情報を表示 -->
+            <!-- アカウントおよびギフトの配送先情報を表示 -->
         <h3>配送先情報</h3>
-        <p>郵便番号: <strong>${account.postnum}</strong></p>
-        <p>住所: <strong>${account.address}</strong></p>
-
         <form action="PurchaseConfirmationServlet" method="post">
+            <fieldset>
+                <legend>配送先を選択</legend>
+                <label>
+                    <input type="radio" name="deliveryAddress" value="account">
+                    ${account.name} (${account.postnum}, ${account.address})
+                </label><br>
+          		<c:forEach var="gift" items="${gifts}">	
+                    <label>
+                         <input type="radio" name="deliveryAddress" value="gift_${gift.giftId}">
+                        ${gift.gname} (${gift.gpostnum}, ${gift.gaddress})
+                    </label><br>
+               </c:forEach>
+            </fieldset>
+
+            <!-- カート情報を再送信 -->
             <c:forEach var="cartItem" items="${cartItems}" varStatus="status">
                 <input type="hidden" name="item_${status.index}_itemId" value="${cartItem.itemId}">
                 <input type="hidden" name="item_${status.index}_quantity" value="${cartItem.quantity}">
@@ -77,11 +120,16 @@
                     <c:when test="${cartItem.isCoffee == 1}">
                         <input type="hidden" name="item_${status.index}_coffeeStatus" value="${cartItem.coffeeStatus}">
                     </c:when>
+                    <c:otherwise>
+                        <input type="hidden" name="item_${status.index}_coffeeStatus" value="お菓子">
+                    </c:otherwise>
                 </c:choose>
             </c:forEach>
             <input type="hidden" name="shippingFee" value="${shippingFee}">
+            <input type="hidden" name="tax" value="${tax}">
+            <input type="hidden" name="totalAmount" value="${totalPrice + tax + shippingFee}">
 
-			<!-- 支払い方法選択 -->
+            <!-- 支払い方法選択 -->
             <h3>支払い方法</h3>
             <label><input type="radio" name="paymentMethod" value="クレジットカード" required> クレジットカード</label><br>
             <label><input type="radio" name="paymentMethod" value="代引き"> 代引き</label><br>
@@ -94,8 +142,8 @@
             <input type="submit" value="購入内容確認" class="button-inline">
         </form>
         <form action="CartServlet">
-			<input type="submit" value="戻る" />
-		</form>
+            <input type="submit" value="戻る" />
+        </form>
     </main>
 </body>
 </html>

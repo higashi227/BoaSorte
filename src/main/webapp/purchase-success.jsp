@@ -10,5 +10,9 @@
 <body>
 <caption>【購入完了】</caption>
     <p>購入が完了しました。</p>
+    
+    <form action="index.jsp">
+        <input type="submit" value="商品一覧へ" />
+    </form>
 </body>
 </html>
