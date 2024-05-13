@@ -78,9 +78,9 @@ public class PurchaseServlet extends HttpServlet {
           
 
             request.setAttribute("cartItems", cartItems);
-            request.setAttribute("totalPrice", totalPrice + shippingFee + tax);
+            request.setAttribute("totalPrice", totalPrice + shippingFee);
             request.setAttribute("shippingFee", shippingFee);
-         
+            request.setAttribute("tax", tax);
             request.setAttribute("remainingForFreeShipping", remainingForFreeShipping);
             request.setAttribute("account", account);
             request.setAttribute("gifts", gifts);
