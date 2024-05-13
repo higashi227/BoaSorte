@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html lang="ja">
 <jsp:include page="head.jsp">
@@ -13,7 +14,7 @@
 		<caption>【カート】</caption>
 		<thead>
 			<tr>
-				<th scope="auto">アイテムID</th>
+				
                 <th scope="auto">アイテム名</th>
                 <th scope="auto">価格</th>
                 <th scope="auto">数量</th>
@@ -26,7 +27,7 @@
 			<c:set var="totalPrice" value="0" />
 			<c:forEach var="cartItem" items="${cartItems}">
 				<tr>
-					<td>${cartItem.itemId}</td>
+					
                     <td>${cartItem.name}</td>
                     <td>${cartItem.price}</td>
                     <td>
@@ -42,7 +43,16 @@
 						<c:set var="totalPrice" value="${totalPrice + subtotal}" />
 						${subtotal}
 					</td>
-					<td>${cartItem.coffeeStatus}</td>
+					<td>
+					 <c:choose>
+                            <c:when test="${cartItem.coffeeStatus != null}">
+                                ${cartItem.coffeeStatus}
+                            </c:when>
+                            <c:otherwise>
+                                <span>お菓子</span>
+                            </c:otherwise>
+                        </c:choose>
+					</td>
 					<td>
 						<form action="RemoveFromCartServlet" method="post">
 							<input type="hidden" name="itemId" value="${cartItem.itemId}">
@@ -52,19 +62,27 @@
 					</td>
 				</tr>
 			</c:forEach>
-			<tr>
-				<td colspan="4" style="text-align: right;"><strong>合計金額:</strong></td>
-				<td><strong>${totalPrice}</strong></td>
-				<td></td>
-			</tr>
-		</tbody>
-	</table>
-	<form action="PurchaseServlet" method="post" class="form-inline">
-		<input type="submit" value="購入" class="button-inline">
-	</form>
-	<form action="MinServlet">
-		<input type="submit" value="商品一覧へ" />
-	</form>
-	</main>
+			 <!-- 税計算 -->
+           <c:set var="taxDecimal" value="${totalPrice * 0.1}" />
+			<c:set var="tax" value="${fn:substringBefore(taxDecimal, '.')}" />
+			 <tr>
+                <td colspan="4" style="text-align: right;"><strong>税（10%）:</strong></td>
+                <td><strong>${tax}</strong></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="4" style="text-align: right;"><strong>合計金額:</strong></td>
+                <td><strong>${totalPrice + tax}</strong></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <form action="PurchaseServlet" method="post" class="form-inline">
+        <input type="submit" value="購入手続き" class="button-inline">
+    </form>
+    <form action="MinServlet">
+        <input type="submit" value="商品一覧へ" />
+    </form>
+    </main>
 </body>
-</html>
+</html

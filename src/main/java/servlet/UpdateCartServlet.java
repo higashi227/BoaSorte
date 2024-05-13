@@ -34,7 +34,8 @@ public class UpdateCartServlet extends HttpServlet {
         int itemId = Integer.parseInt(request.getParameter("itemId"));
         int quantity = Integer.parseInt(request.getParameter("quantity"));
         String coffeeStatus = request.getParameter("coffeeStatus");
-
+      
+        
         try {
             CartDAO cartDAO = new CartDAO();
             cartDAO.updateCartQuantity(accountId, itemId, quantity, coffeeStatus);

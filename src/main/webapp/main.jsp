@@ -47,6 +47,7 @@
                 				<option value="粗挽き">粗挽き</option>
                 			</select>
                 		<% } else { %>
+                			<input type="hidden" name="coffeeStatus" value="お菓子" />
                 			<span>コーヒーでない</span>
                 		<% } %>
             		</td>
