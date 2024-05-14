@@ -112,7 +112,6 @@ public class DashboardDAO {
 			rs = stmt.executeQuery();
 
 			// 結果セットから地域ごとの商品購入回数を取得または作成して、購入回数を設定
-
 			while (rs.next()) {
 				long itemId = rs.getLong("item_id");
 				String region = rs.getString("region");
