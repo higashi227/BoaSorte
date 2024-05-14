@@ -66,13 +66,18 @@
 			type="submit" value="商品新規登録">
 	</form>
 
-
-
-
+<p>
 
 	<form action="AdminItemEditServlet" method="post">
 		<input type="hidden" name="edit" value="true"> <input
 			type="submit" value="商品編集・削除">
+	</form>
+	
+	<p>
+	
+	<form action="AdminLogoutServlet" method="post">
+		<input type="hidden" name="edit" value="true"> <input
+			type="submit" value="ログアウト">
 	</form>
 
 
@@ -109,7 +114,7 @@
 		});
 	</script>
 
-	<%--// 商品の購入回数の集計結果を棒グラフで表示--%>
+	<%--// 商品の購入回数の集計結果を円グラフで表示--%>
 	<div style="width: 300px">
 		<canvas id="mychart-purchase"></canvas>
 	</div>
@@ -142,9 +147,10 @@
 				} ],
 			},
 		});
+		
 	</script>
 	
-	<%--//商品の購入を地域別に表示--%>
+	<%--//商品の購入を地域別に円グラフで表示--%>
 
 	<div style="width: 300px">
 		<canvas id="mychart-region"></canvas>
