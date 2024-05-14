@@ -17,7 +17,7 @@
 	<div class="main-container">
 		<h2>ユーザー情報</h2>
 			<c:forEach var="account" items="${accounts}">
-			
+			<div class="center-block">
 				<dl>
 					<dt>メールアドレス</dt>
 					<dd>${account.mail_address}</dd>
@@ -68,6 +68,7 @@
 				</dl>
 					
 			</c:forEach>
+			</div>
 	
 		<div class="btnyoko btncenter">
 			<form action="edit-account">

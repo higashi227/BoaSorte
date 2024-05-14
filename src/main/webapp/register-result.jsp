@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <jsp:include page="head.jsp">
@@ -7,9 +8,11 @@
 <body>
 	<jsp:include page="header.jsp" />
 	<main>
-    <h2>アカウント登録結果</h2>
-    <p>${message}</p>
-    <a href="index.jsp">ホームページに戻る</a>
-    </main>
+		<div class="main-container">
+			<h2>アカウント登録結果</h2>
+			<p class="center">${message}</p>
+			<p class="center"><button onclick="window.location.href='./index.jsp'" class="btn2">戻る</button></p>
+		</div>
+	</main>
 </body>
 </html>
