@@ -13,7 +13,7 @@
             <caption>【購入内容確認】</caption>
             <thead>
                 <tr>
-                    <th scope="auto">アイテムID</th>
+                   
                     <th scope="auto">アイテム名</th>
                     <th scope="auto">価格</th>
                     <th scope="auto">数量</th>
@@ -24,7 +24,7 @@
             <tbody>
                 <c:forEach var="cartItem" items="${cartItems}">
                     <tr>
-                        <td>${cartItem.itemId}</td>
+                       
                         <td>${cartItem.name}</td>
                         <td>${cartItem.price}</td>
                         <td>${cartItem.quantity}</td>
@@ -60,10 +60,7 @@
         </table>
 		<p>配送日: <strong>${deliveryDate}</strong></p>
 		<p>支払い方法: <strong>${paymentMethod}</strong></p>
-		<h3>選択された配送先情報</h3>
-		<p>名前: <strong>${selectedAddress.name}</strong></p>
-		<p>郵便番号: <strong>${selectedAddress.postnum}</strong></p>
-		<p>住所: <strong>${selectedAddress.address}</strong></p>
+		 <p><strong>選択された配送先情報:</strong> ${selectedAddress}</p>
 		<form action="FinalizePurchaseServlet" method="post">
             <c:forEach var="cartItem" items="${cartItems}" varStatus="status">
                 <input type="hidden" name="item_${status.index}_itemId" value="${cartItem.itemId}">

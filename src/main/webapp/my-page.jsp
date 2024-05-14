@@ -69,7 +69,7 @@
 				</dl>
 					
 			</c:forEach>
-		
+	
 		<div class="btnyoko">
 			<form action="edit-account">
 				<button type="submit" class="btn1">アカウント編集</button>
