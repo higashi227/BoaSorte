@@ -118,7 +118,7 @@
                 </tr>
                 <tr>
                     <td colspan="4" style="text-align: right;"><strong>合計金額:</strong></td>
-                    <td colspan="2"><strong>${totalPrice + tax}</strong></td>
+                    <td colspan="2"><strong>${totalPrice + tax + shippingFee}</strong></td>
                 </tr>
                 <c:if test="${remainingForFreeShipping > 0}">
                     <tr>
@@ -165,8 +165,10 @@
                 </c:choose>
             </c:forEach>
             <input type="hidden" name="shippingFee" value="${shippingFee}">
-            <input type="hidden" name="tax" value="${tax}">
-            <input type="hidden" name="totalAmount" value="${totalPrice +shippingFee}">
+    		<input type="hidden" name="tax" value="${tax}">
+    		<input type="hidden" name="totalPrice" value="${totalPrice}">
+    		<input type="hidden" name="totalAmount" value="${totalPrice + shippingFee + tax}">
+
 
             <!-- 支払い方法選択 -->
             <h3>支払い方法</h3>
