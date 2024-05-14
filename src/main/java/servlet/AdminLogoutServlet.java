@@ -20,7 +20,7 @@ public class AdminLogoutServlet extends HttpServlet {
             session.invalidate();
         }
         // ログインページにリダイレクト
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("adminlogin.jsp");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
