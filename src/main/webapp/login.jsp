@@ -8,16 +8,25 @@
 <body>
 	<jsp:include page="header.jsp" />
 	<main>
+	<div class="main-container">
 		<form action="Login" method="post">
 			<h2>ログイン</h2>
-			<label>メールアドレス</label><br>
-			<input type="text" name="mailAddress"><br>
 			
-			<label>パスワード</label><br>
-			<input type="password" name="password"><br>
+			<dl>
+				<dt>メールアドレス</dt>
+				<dd><input type="text" name="mailAddress" class="inpw" placeholder="abcd@sample.jp"></dd>
+			</dl>
 			
-			<input type="submit" value="ログイン">
+			<dl>
+				<dt>パスワード</dt>
+				<dd><input type="password" name="password" class="inpw"></dd>
+			</dl>
+			
+			<div class="btncenter">
+				<input type="submit" value="ログイン" class="btn1">
+			</div>
 		</form>
+	</div>
 	</main>
 </body>
 </html>

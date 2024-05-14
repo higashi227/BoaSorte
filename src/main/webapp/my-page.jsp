@@ -14,66 +14,77 @@
             List<Map<String, String>> accounts = (List<Map<String, String>>) request.getAttribute("accounts");
             System.out.println("リクエストスコープにセットされたアカウント情報: " + accounts);
         %>
-
+	<div class="main-container">
 		<h2>ユーザー情報</h2>
+		
 			<c:forEach var="account" items="${accounts}">
-				<label>メールアドレス</label><br>
-				${account.mail_address}
-				<br>
-				
-				<label>名前</label><br>
-				${account.name}
-				<br>
-				
-				<label>郵便番号</label><br>
-				${account.postnum}
-				<br>
-				
-				<label>住所</label><br>
-				${account.address}
-				<br>
-				
-				<label>誕生日</label><br>
-				${account.birthday}
-				<br>
-
-				<label>電話番号</label><br>
-				${account.telephone}
-				<br>
-
-				<label>DM</label><br>
-				<c:choose>
-					<c:when test="${account.ok_dm eq '1'}">
-                		受け取る
-					</c:when>
-					<c:otherwise>
-                		受け取らない
-					</c:otherwise>
-				</c:choose>
-				<br>
-				
-				<label>更新日時</label><br>
-				${account.updated_at}
-				<br>
-				
-			</c:forEach>
 			
-		<form action="edit-account">
-			<button type="submit">アカウント編集</button>
-		</form>
-
-		<form action="gift-list">
-			<button type="submit">ギフト先一覧</button>
-		</form>
+				<dl>
+					<dt>メールアドレス</dt>
+					<dd>${account.mail_address}</dd>
+				</dl>
+					
+				<dl>	
+					<dt>名前</dt>
+					<dd>${account.name}</dd>
+				</dl>
+					
+				<dl>	
+					<dt>郵便番号</dt>
+					<dd>${account.postnum}</dd>
+				</dl>
+					
+				<dl>
+					<dt>住所</dt>
+					<dd>${account.address}</dd>
+				</dl>
+					
+				<dl>	
+					<dt>誕生日</dt>
+					<dd>${account.birthday}</dd>
+				</dl>
 				
-		<form action="MinServlet">
-			<button type="submit">商品一覧へ</button>
-		</form>
+				<dl>
+					<dt>電話番号</dt>
+					<dd>${account.telephone}</dd>
+				</dl>
+					
+				<dl>	
+					<dt>DM</dt>
+					<dd>
+						<c:choose>
+							<c:when test="${account.ok_dm eq '1'}">
+		                		受け取る
+							</c:when>
+							<c:otherwise>
+		                		受け取らない
+							</c:otherwise>
+						</c:choose>
+					</dd>
+				</dl>
+				
+				<dl>				
+					<dt>更新日時</dt>
+					<dd>${account.updated_at}</dd>
+				</dl>
+					
+			</c:forEach>
 		
-		<form action="Logout">
-			<button type="submit">ログアウト</button>
-		</form>
-		
+		<div class="btnyoko">
+			<form action="edit-account">
+				<button type="submit" class="btn1">アカウント編集</button>
+			</form>
+			&nbsp;
+			<form action="gift-list">
+				<button type="submit" class="btn1">ギフト先一覧</button>
+			</form>
+		</div>
+		<div class="btncenter">
+			<form action="Logout">
+				<button type="submit" class="btn2">ログアウト</button>
+			</form>
+		</div>
+	</div>
 	</main>
 	<footer> </footer>
 </body>

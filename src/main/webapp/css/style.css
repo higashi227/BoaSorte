@@ -1,6 +1,6 @@
 @charset "UTF-8";
-@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=BIZ+UDGothic&family=Kaisei+Opti&family=Satisfy&display=swap');
+	
 * {
     box-sizing: border-box;
 }
@@ -45,6 +45,72 @@ main {
     padding-top: 100px;
 }
 
+.main-container{
+	background-color: #ffffff;
+	width: 60%;
+	margin-right: auto;
+	margin-left: auto;
+	padding: 20px;
+}
+
+.main-container h2{
+	font-family: "BIZ UDGothic", sans-serif;
+	padding: 10px;
+	position: relative;
+	margin-bottom: 1em;
+	text-align: center;
+}
+
+.main-container h2:before{
+	content: '';
+	position: absolute;
+	bottom: -5px;
+	display: inline-block;
+	width: 15%;
+	height: 5px;
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: #7DA3A1;
+	border-radius: 2px;
+}
+
+.main-container dl dt {
+    border-left: solid 3px #7DA3A1;
+    font-family: "BIZ UDGothic", sans-serif;
+    margin-right: 30px;
+    display: inline-block; /* 横並びに配置 */
+    vertical-align: top; /* 垂直方向の配置を調整 */
+}
+
+.main-container dl dd {
+    margin-left: 0; /* dd要素のマージンをリセット */
+    display: inline-block; /* 横並びに配置 */
+    vertical-align: top; /* 垂直方向の配置を調整 */
+}
+
+.main-container dl{
+	margin-bottom: 1rem;
+	
+}
+.main-container dt {
+	padding-left: 10px;
+	width: 30%;
+	font-weight: bold;
+}
+
+.inpw { width: 350px;}
+
+.btncenter {
+	display: flex;
+ 	justify-content: center;
+}
+
+.btnyoko {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 5px;
+}
+
 h1 {
     font-family: "Satisfy", cursive;
     margin: 0;
@@ -52,16 +118,30 @@ h1 {
     font-size: 2rem;
 }
 
-button {
-	background-color:#00A862;
-	border-radius: 100vh;
+.btn1 {
+	background-color: #34675C;
+	border-radius: 4px;
 	color: #fff;
-	padding: 8px 16px;
+	padding: 7px 12px;
 	border: 0;
+	border: solid 1px #34675C
 }
 
-button:hover {
-	background-color: #0acc7b;
+.btn1:hover {
+	opacity: .5;
+}
+
+.btn2 {
+	background-color: #ffffff;
+	border-radius: 4px;
+	color: #34675C;
+	padding: 7px 12px;
+	border: solid 1px #34675C;
+}
+
+.btn2:hover{
+	background-color: #34675C;
+	color: #fff;
 }
 
 /* メニュー用 */
@@ -126,7 +206,7 @@ button:hover {
 }
 /* index.jsp 商品一覧用 */
 .main-content {
-    margin: 20px;
+    width: 90%;
 }
 .all-items-top {
     display: flex;
@@ -162,11 +242,14 @@ button:hover {
 .item-details {
     padding: 10px;
 }
-.item-details h2 {
+.item-details h3 {
     margin-top: 0;
     margin-bottom: 10px;
     font-size: 18px;
+    background:linear-gradient(transparent 60%, #7DA3A1 60%);
 }
+
+
 .item-details p {
     margin: 0;
     font-size: 14px;
