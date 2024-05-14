@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class DashboardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     
+    	
     	DashboardDAO dashboardDAO = new DashboardDAO();
     	
     	 System.out.println("データの取得を開始します");

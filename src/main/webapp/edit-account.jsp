@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <jsp:include page="head.jsp">
-    <jsp:param name="pageTitle" value="BoaSorte--アカウント編集" />
+    <jsp:param name="pageTitle" value="BoaSorte--ユーザー編集" />
 </jsp:include>
 
 <body>
@@ -13,7 +13,7 @@
     <div class="main-container">
         <form action="update-account" method="post">
             <c:forEach var="account" items="${accounts}">
-            	<h2>アカウント編集</h2>
+            	<h2>ユーザー編集</h2>
                                 
                 <input type="hidden" name="accountId" value="${account.account_id}" />
                 
@@ -49,7 +49,10 @@
                 
                 <div class="btncenter">
                 	<input type="submit" class="btn1" value="編集" />
+                	&nbsp;
+		        	<button class="btn2" onclick="window.location.href='./my-page';">戻る</button>
                 </div>
+
                 
             </c:forEach>
         </form>

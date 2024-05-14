@@ -29,7 +29,7 @@ function displayItems(items) {
         var itemDetails = document.createElement('div');
         itemDetails.classList.add('item-details');
         
-        var itemName = document.createElement('h3');
+        var itemName = document.createElement('h4');
         itemName.textContent = item.name;
         
         var itemPrice = document.createElement('p');

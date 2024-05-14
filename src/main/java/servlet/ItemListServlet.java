@@ -38,7 +38,7 @@ public class ItemListServlet extends HttpServlet {
         request.setAttribute("itemList", itemList);
 
         // 商品一覧ページにフォワード
-        request.getRequestDispatcher("adminmanagement.jsp").forward(request, response);
+        request.getRequestDispatcher("DashboardServlet").forward(request, response);
     }
 
   
