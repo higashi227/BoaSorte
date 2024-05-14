@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <jsp:include page="head.jsp">
-	<jsp:param name="pageTitle" value="BoaSorte -- 新規登録完了" />
+	<jsp:param name="pageTitle" value="BoaSorte -- ログイン" />
 </jsp:include>
 <body>
 	<jsp:include page="header.jsp" />
@@ -25,6 +25,8 @@
 			<div class="btncenter">
 				<input type="submit" value="ログイン" class="btn1">
 			</div>
+			<p class="btncenter"><a href="register.jsp">はじめてご利用の方はこちら</a></p>
+			
 		</form>
 	</div>
 	</main>

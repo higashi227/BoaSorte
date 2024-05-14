@@ -19,6 +19,9 @@ a {
 	text-decoration: underline;
 }
 
+a:hover {
+	text-decoration: none;
+}
 
 
 header {
@@ -30,6 +33,7 @@ header {
     background-color: rgba(0,0,0,.5);
     display: flex;
     align-items: center;
+    z-index: 9999;
 }
 
 header a {
@@ -74,6 +78,27 @@ main {
 	border-radius: 2px;
 }
 
+.main-container h3 {
+	font-family: "BIZ UDGothic", sans-serif;
+	position: relative;
+	margin-bottom: 1em;
+	margin-top: 1em;
+	text-align: center;
+}
+
+.main-container h3:before {
+	content: '';
+	position: absolute;
+	bottom: -5px;
+	display: inline-block;
+	width: 15%;
+	height: 5px;
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: #7DA3A1;
+	border-radius: 2px;
+}
+
 .main-container dl dt {
     border-left: solid 3px #7DA3A1;
     font-family: "BIZ UDGothic", sans-serif;
@@ -98,18 +123,78 @@ main {
 	font-weight: bold;
 }
 
+/* テーブル定義 */
+
+table {
+	border-collapse:  collapse;
+}
+table th,
+table td {
+    width: auto;
+}
+
+th,td {
+	border: solid 1px #333333;
+
+}
+
+th {
+	font-family: "BIZ UDGothic", sans-serif;
+	background-color: #34675C;
+	color: #ffffff;
+}
+
+td {
+	background-color: #e6e6e6;
+}
+
+table tr:nth-child(odd) td {
+	background: #fff;
+}
+.number{
+    width: 10%;
+ }
+ 
+ .number2{
+    width: 20%;
+ }
+ 
+.inpnum {
+	width: 100%;
+}
+
+.center {
+	text-align: center;
+}
+.right {
+	text-align: right;
+}
+
+
 .inpw { width: 350px;}
 
 .btncenter {
 	display: flex;
  	justify-content: center;
+ 	padding-bottom: 0.5rem;
 }
 
 .btnyoko {
 	display: flex;
 	justify-content: center;
-	margin-bottom: 5px;
 }
+
+.btnyoko-new {
+    display: flex;
+    align-items: center;
+}
+
+.btnyoko-new form {
+    display: flex; /* フォーム内の要素も横並びにする */
+    align-items: center; /* フォーム内の要素を中央揃えにする */
+    width: 100%;
+}
+
 
 h1 {
     font-family: "Satisfy", cursive;
@@ -123,8 +208,8 @@ h1 {
 	border-radius: 4px;
 	color: #fff;
 	padding: 7px 12px;
-	border: 0;
-	border: solid 1px #34675C
+	border: solid 1px #34675C;
+	margin:0;
 }
 
 .btn1:hover {
@@ -137,6 +222,7 @@ h1 {
 	color: #34675C;
 	padding: 7px 12px;
 	border: solid 1px #34675C;
+	margin:0;
 }
 
 .btn2:hover{
@@ -242,11 +328,16 @@ h1 {
 .item-details {
     padding: 10px;
 }
-.item-details h3 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    font-size: 18px;
-    background:linear-gradient(transparent 60%, #7DA3A1 60%);
+
+.item-details h4 {
+    font-family: "BIZ UDGothic", sans-serif;
+    position: relative;
+    margin-bottom: 1em;
+    text-align: center;
+    padding: 10px 0; 
+    background-color: #7DA3A1; /* 背景色を追加 */
+    color: #ffffff; 
+    border-radius: 2px; 
 }
 
 

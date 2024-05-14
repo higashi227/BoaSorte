@@ -17,7 +17,7 @@
             	<img src="${item.imagePath}" alt="${item.name}" />
 
                 <div class="item-details">
-                    <h3>${item.name}</h3>
+                    <h4>${item.name}</h4>
                     <p>Price: ${item.price}円(税別)</p>
                     <p>${item.isCoffee() ? 'Coffee' : 'Foods'}</p>
                 </div>

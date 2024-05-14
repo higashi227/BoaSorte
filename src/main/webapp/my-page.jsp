@@ -16,7 +16,6 @@
         %>
 	<div class="main-container">
 		<h2>ユーザー情報</h2>
-		
 			<c:forEach var="account" items="${accounts}">
 			
 				<dl>
@@ -70,14 +69,19 @@
 					
 			</c:forEach>
 	
-		<div class="btnyoko">
+		<div class="btnyoko btncenter">
 			<form action="edit-account">
-				<button type="submit" class="btn1">アカウント編集</button>
+				<button type="submit" class="btn1">ユーザー編集</button>
 			</form>
 			&nbsp;
 			<form action="gift-list">
 				<button type="submit" class="btn1">ギフト先一覧</button>
 			</form>
+			&nbsp;
+			<form action="OrderHistoryServlet">
+				<button type="submit" class="btn1">購入履歴一覧</button>
+			</form>
+			
 		</div>
 		<div class="btncenter">
 			<form action="Logout">

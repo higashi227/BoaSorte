@@ -21,7 +21,7 @@ public class AdminLoginServlet extends HttpServlet {
         try {
             if (AdminDAO.validate(login)) {
                 // ログイン成功したら商品一覧ページにリダイレクト
-                response.sendRedirect("ItemListServlet"); 
+                response.sendRedirect("ItemListServlet");
             } else {
                 response.sendRedirect("error.jsp");
             }
