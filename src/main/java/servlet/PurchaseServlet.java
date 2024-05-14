@@ -46,6 +46,7 @@ public class PurchaseServlet extends HttpServlet {
         GiftRegisterDAO giftRegisterDAO = new GiftRegisterDAO();
         Map<String, String> account = new HashMap<>();
        
+        
         int freeShippingThreshold = 3000;
         int shippingFee = 650;
 
@@ -78,7 +79,7 @@ public class PurchaseServlet extends HttpServlet {
           
 
             request.setAttribute("cartItems", cartItems);
-            request.setAttribute("totalPrice", totalPrice + shippingFee);
+            request.setAttribute("totalPrice", totalPrice);
             request.setAttribute("shippingFee", shippingFee);
             request.setAttribute("tax", tax);
             request.setAttribute("remainingForFreeShipping", remainingForFreeShipping);

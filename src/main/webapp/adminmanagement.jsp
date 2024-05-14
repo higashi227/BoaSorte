@@ -1,9 +1,14 @@
-<!DOCTYPE html>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
 <%@ page import="model.Item"%>
 <%@ page import="java.util.Iterator"%>
+<%@ page import="java.util.ArrayList, java.util.List"%>
+
+
+<!DOCTYPE html>
+
 
 
 <html lang="ja">
@@ -69,225 +74,118 @@
 		<input type="hidden" name="edit" value="true"> <input
 			type="submit" value="商品編集・削除">
 	</form>
-	
-	<%
-    List<Object[]> referralCounts = (List<Object[]>) request.getAttribute("referralCounts");
-    if (referralCounts != null && !referralCounts.isEmpty()) {
-        for (Object[] data : referralCounts) {
-            String recognition = (String) data[0];
-            int count = (int) data[1];
-%>
-            <p>Recognition: <%= recognition %>, Count: <%= count %></p>
-<%
-        }
-    } else {
-%>
-        <p>No referral counts available.</p>
-<%
-    }
-%>
 
-	<%--// サイトを知ったかの集計結果を円グラフで表示
-	<div style="width: 400px">
-		<canvas id="mychart-pie"></canvas>
+
+	<%--サイトを知ったかの集計結果を円グラフで表示--%>
+	<div style="width: 300px">
+		<canvas id="mychart-referral"></canvas>
 	</div>
 
-	 <script>
-		var ctx = document.getElementById('mychart-pie');
+	<script type="text/javascript">
+		var recognition = [];
+		var count = [];
+		
+		<%List<Object[]> referralCounts = (List<Object[]>) request.getAttribute("referralCounts");
+			if (referralCounts != null && !referralCounts.isEmpty()) {
+			for (Object[] data : referralCounts) {
+			String recognition = (String) data[0];
+			int count = (int) data[1];%>
+			
+            recognition.push("<%=recognition.replaceAll("\"", "\\\"")%>");
+			count.push(<%=count%>);
+		<%}}%>
+		
+		var ctx = document.getElementById('mychart-referral').getContext('2d');
 		var myChart = new Chart(ctx, {
 			type : 'pie',
 			data : {
-				labels : [ 'Red', 'Green', 'Blue' ],
+				labels : recognition,
 				datasets : [ {
-					data : [ 10, 20, 30 ],
-					backgroundColor : [ '#f88', '#484', '#48f' ],
+					data : count,
+					backgroundColor :  ['#f88','#8f8','#88f','#ff8','#f8f',],
 					weight : 100,
 				} ],
 			},
 		});
 	</script>
-	
-	// 商品の購入回数の集計結果を棒グラフで表示
-	<div style="width: 400px">
-		<canvas id="mychart-bar"></canvas>
+
+	<%--// 商品の購入回数の集計結果を棒グラフで表示--%>
+	<div style="width: 300px">
+		<canvas id="mychart-purchase"></canvas>
 	</div>
 
-	<script>
-		var ctx = document.getElementById('mychart-bar');
+	<script type="text/javascript">
+    var itemIds = [];
+    var purchaseCounts = [];
+    <%
+        List<Object[]> purchaseCounts = (List<Object[]>) request.getAttribute("purchaseCounts");
+        if (purchaseCounts != null && !purchaseCounts.isEmpty()) {
+            for (Object[] data : purchaseCounts) {
+                long itemId = (long) data[0];
+                int count = (int) data[1];
+    %>
+                itemIds.push("<%= itemId %>");
+                purchaseCounts.push(<%= count %>);
+    <%
+            }
+        }
+    %>
+		var ctx = document.getElementById('mychart-purchase').getContext('2d');
 		var myChart = new Chart(ctx, {
-			type : 'bar',
+			type : 'pie',
 			data : {
-				labels : [ 'Sun', 'Mon', 'Tue' ],
+				labels : itemIds,
 				datasets : [ {
-					label : 'Red',
-					data : [ 25, 35, 40 ],
-					backgroundColor : '#f88',
-				}, {
-					label : 'Green',
-					data : [ 20, 10, 30 ],
-					backgroundColor : '#484',
-				}, {
-					label : 'Blue',
-					data : [ 30, 20, 15 ],
-					backgroundColor : '#48f',
+					label : '個数',
+					data : purchaseCounts,
+					backgroundColor : ['#f88','#8f8','#88f','#ff8','#f8f',],
 				} ],
 			},
 		});
 	</script>
 	
-	//商品の購入を地域別に表示
+	<%--//商品の購入を地域別に表示--%>
 
-	<div style="width: 400px">
-		<canvas id="mychart"></canvas>
+	<div style="width: 300px">
+		<canvas id="mychart-region"></canvas>
 	</div>
 
-	<script>
-		var ctx = document.getElementById('mychart');
-		var myChart = new Chart(ctx, {
-			type : 'line',
-			data : {
-				labels : [ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ],
-				datasets : [ {
-					label : 'Red',
-					data : [ 20, 35, 40, 30, 45, 35, 40 ],
-					borderColor : '#f88',
-				}, {
-					label : 'Green',
-					data : [ 20, 15, 30, 25, 30, 40, 35 ],
-					borderColor : '#484',
-				}, {
-					label : 'Blue',
-					data : [ 30, 25, 10, 5, 25, 30, 20 ],
-					borderColor : '#48f',
-				} ],
-			},
-			options : {
-				y : {
-					min : 0,
-					max : 60,
-				},
-			},
-		});
-	</script>
+	
+    <script type="text/javascript">
+        var itemId = [];
+        var regions = [];
+        var purchaseCount = [];
+        
+        <%
+        List<Object[]> regionCounts = (List<Object[]>) request.getAttribute("regionCounts");
+        if (regionCounts != null && !regionCounts.isEmpty()) {
+            for (Object[] data : regionCounts) {
+                long itemId = (long) data[0];
+                String region = (String) data[1];
+                int count = (int) data[2];
+    %>
+                itemIds.push("<%= itemId %>");
+                regions.push("<%= region.replaceAll("\"", "\\\"") %>");
+                purchaseCounts.push(<%= count %>);
+    <%
+            }
+        }
+    %>
 
 
-
-	<%-- <div style="" "400" height="400">
-		<canvas id="referralChart"></canvas>
-		<script>
-		// サイトを知ったかの集計結果を円グラフで表示
-    	var referralCounts = <c:out value="${referralCounts}" />;
-    	var referralLabels = [];
-    	var referralData = [];
-    	for (var i = 0; i < referralCounts.length; i++) {
-        	referralLabels.push(referralCounts[i][0]);
-        	referralData.push(referralCounts[i][1]);
-    	}
-
-    	var referralChartCanvas = document.getElementById('referralChart').getContext('2d');
-    	var referralChart = new Chart(referralChartCanvas, {
-        	type: 'pie',
-        	data: {
-            	labels: referralLabels,
-            	datasets: [{
-                	data: referralData,
-                	backgroundColor: [
-                    	'rgba(255, 99, 132, 0.5)',
-                    	'rgba(54, 162, 235, 0.5)',
-                    	'rgba(255, 206, 86, 0.5)',
-                    	'rgba(75, 192, 192, 0.5)',
-                    	'rgba(153, 102, 255, 0.5)',
-                    	'rgba(255, 159, 64, 0.5)'
-                	],
-                	borderWidth: 1
-            	}]
-        	},
-        	options: {
-            	responsive: true
-        	}
-    	});</script>
-    	
-	</div>
-
-	<div style="" "400" height="400">
-		<canvas id="purchaseChart" width="400" height="400"></canvas>
-		<script>
-		// 商品の購入回数の集計結果を棒グラフで表示
-    	var purchaseCounts = <c:out value="${purchaseCounts}" />;
-    	var purchaseLabels = [];
-    	var purchaseData = [];
-    	for (var i = 0; i < purchaseCounts.length; i++) {
-        	purchaseLabels.push(purchaseCounts[i][0]);
-        	purchaseData.push(purchaseCounts[i][1]);
-    	}
-
-    	var purchaseChartCanvas = document.getElementById('purchaseChart').getContext('2d');
-    	var purchaseChart = new Chart(purchaseChartCanvas, {
-        	type: 'bar',
-        	data: {
-            	labels: purchaseLabels,
-            	datasets: [{
-                	label: '購入回数',
-                	data: purchaseData,
-                	backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                	borderColor: 'rgba(54, 162, 235, 1)',
-                	borderWidth: 1
-            	}]
-        	},
-        	options: {
-            	responsive: true,
-            	scales: {
-                	y: {
-                    	beginAtZero: true
-                	}
-            	}
-        	}
-    	});</script>
-		
-	</div>
-
-	<div style="" "400" height="400">
-		<canvas id="regionChart" width="400" height="400"></canvas>
-		
-		<script>
-    	
-
-    	
- 		// サーブレットから受け取った regionCounts を JavaScript 変数に設定
-    	var regionCounts = <c:out value="${regionCounts}" />;
-    	var labels = [];
-    	var data = [];
-    	for (var i = 0; i < regionCounts.length; i++) {
-        	labels.push(regionCounts[i][1]);  // 地域名
-        	data.push(regionCounts[i][2]);    // 購入回数
-    		}
-
-    	var ctx = document.getElementById('regionChart').getContext('2d');
-    	var myChart = new Chart(ctx, {
-        	type: 'bar',
-        	data: {
-            	labels: labels,
-            	datasets: [{
-                	label: '購入回数',
-                	data: data,
-                	backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                	borderColor: 'rgba(255, 99, 132, 1)',
-                	borderWidth: 1
-            	}]
-        	},
-        	options: {
-            	responsive: true,
-            	scales: {
-                	y: {
-                    	beginAtZero: true
-                	}
-            	}
-        	}
-    	});
-	</script>
-	</div>--%>
-
-
-
+	var ctx = document.getElementById('mychart-region').getContext('2d');
+	var myChart = new Chart(ctx, {
+		type : 'pie',
+		data : {
+			labels : regions,
+			datasets : [ {
+				label : '地域',
+				data : purchaseCounts,
+				backgroundColor : ['#f88','#8f8','#88f','#ff8','#f8f',],
+			} ],
+		},
+	});
+    </script>
+   
 </body>
 </html>

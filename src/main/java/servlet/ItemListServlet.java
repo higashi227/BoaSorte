@@ -36,6 +36,8 @@ public class ItemListServlet extends HttpServlet {
 
         // 取得した商品情報をリクエスト属性に設定
         request.setAttribute("itemList", itemList);
+        
+     
 
         // 商品一覧ページにフォワード
         request.getRequestDispatcher("DashboardServlet").forward(request, response);

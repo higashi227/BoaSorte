@@ -17,9 +17,10 @@ public class PurchaseConfirmationServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	  int shippingFee = Integer.parseInt(request.getParameter("shippingFee"));
-          int tax = Integer.parseInt(request.getParameter("tax"));
-          int totalAmount = Integer.parseInt(request.getParameter("totalAmount"));
+    	
+    	 int tax = Integer.parseInt(request.getParameter("tax"));
+    	 int shippingFee = Integer.parseInt(request.getParameter("shippingFee"));
+         int totalAmount = Integer.parseInt(request.getParameter("totalAmount"));
          String deliveryDate = request.getParameter("deliveryDate");
          String paymentMethod = request.getParameter("paymentMethod");
         
@@ -46,10 +47,11 @@ public class PurchaseConfirmationServlet extends HttpServlet {
              cartItems.add(cartItem);
            
          }
-
+         System.out.println("Tax: " + tax); 
          request.setAttribute("cartItems", cartItems);
-         request.setAttribute("shippingFee", shippingFee);
          request.setAttribute("tax", tax);
+       
+         request.setAttribute("shippingFee", shippingFee);
          request.setAttribute("totalAmount", totalAmount);
          request.setAttribute("deliveryDate", deliveryDate);
          request.setAttribute("paymentMethod", paymentMethod);

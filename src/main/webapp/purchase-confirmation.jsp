@@ -41,20 +41,17 @@
                         </td>
                     </tr>
                 </c:forEach>
-                 <c:set var="taxDecimal" value="${totalPrice * 0.1}" />
-				<c:set var="tax" value="${fn:substringBefore(taxDecimal, '.')}" />
-				<tr>
-                	<td colspan="4" style="text-align: right;"><strong>税（10%）:</strong></td>
-                	<td><strong>${tax}</strong></td>
-                	<td></td>
-            	</tr>
+                 <tr>
+                    <td colspan="4" style="text-align: right;"><strong>税（10%）:</strong></td>
+                    <td><strong>${tax}</strong></td>
+                </tr>
                 <tr>
                     <td colspan="4">送料</td>
                     <td colspan="2">${shippingFee}</td>
                 </tr>
                 <tr>
                     <td colspan="4">合計金額</td>
-                    <td colspan="2">${totalPrice + tax}</td>
+                    <td colspan="2">${totalAmount}</td>
                 </tr>
             </tbody>
         </table>

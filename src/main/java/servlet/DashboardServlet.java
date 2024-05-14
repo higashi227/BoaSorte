@@ -23,16 +23,19 @@ public class DashboardServlet extends HttpServlet {
              // サイトを知ったかの集計結果を取得
              List<Object[]> referralCounts = dashboardDAO.getReferralCounts();
              request.setAttribute("referralCounts", referralCounts);
-             System.out.println("取得完了");
-
-//             // 商品の購入回数の集計結果を取得
-//             List<Object[]> purchaseCounts = dashboardDAO.getpurchaseCounts();
-//             request.setAttribute("purchaseCounts", purchaseCounts);
-//
-//             // 商品がどの地域で購入されているかの集計結果を取得
-//             List<Object[]> regionCounts = dashboardDAO.getregionCounts();
-//             request.setAttribute("regionCounts", regionCounts);
-//             
+             System.out.println("サイトの集計完了");
+             
+             // 商品の購入回数の集計結果を取得
+             List<Object[]> purchaseCounts = dashboardDAO.getpurchaseCounts();
+             request.setAttribute("purchaseCounts", purchaseCounts);
+             System.out.println("購入回数の集計完了");
+              
+              
+             // 商品がどの地域で購入されているかの集計結果を取得
+             List<Object[]> regionCounts = dashboardDAO.getregionCounts();
+             request.setAttribute("regionCounts", regionCounts);
+             System.out.println("地域の集計完了");
+             
              
 
              // ダッシュボードのJSPにフォワード
