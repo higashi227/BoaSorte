@@ -37,6 +37,8 @@ public class DashboardDAO {
 				int count = rs.getInt(2);
 				Object[] data = {recognition, count};
 				referralCounts.add(data);
+				
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

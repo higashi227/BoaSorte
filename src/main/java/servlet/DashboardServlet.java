@@ -15,25 +15,29 @@ import jakarta.servlet.http.HttpServletResponse;
 public class DashboardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     
+    	DashboardDAO dashboardDAO = new DashboardDAO();
     	
+    	 System.out.println("データの取得を開始します");
     	 try {
              // サイトを知ったかの集計結果を取得
-             List<Object[]> referralCounts = DashboardDAO.getReferralCounts();
+             List<Object[]> referralCounts = dashboardDAO.getReferralCounts();
              request.setAttribute("referralCounts", referralCounts);
+             System.out.println("取得完了");
 
-             // 商品の購入回数の集計結果を取得
-             List<Object[]> purchaseCounts = DashboardDAO.getpurchaseCounts();
-             request.setAttribute("purchaseCounts", purchaseCounts);
-
-             // 商品がどの地域で購入されているかの集計結果を取得
-             List<Object[]> regionCounts = DashboardDAO.getregionCounts();
-             request.setAttribute("regionCounts", regionCounts);
-             
+//             // 商品の購入回数の集計結果を取得
+//             List<Object[]> purchaseCounts = dashboardDAO.getpurchaseCounts();
+//             request.setAttribute("purchaseCounts", purchaseCounts);
+//
+//             // 商品がどの地域で購入されているかの集計結果を取得
+//             List<Object[]> regionCounts = dashboardDAO.getregionCounts();
+//             request.setAttribute("regionCounts", regionCounts);
+//             
              
 
              // ダッシュボードのJSPにフォワード
              request.getRequestDispatcher("/adminmanagement.jsp").forward(request, response);
-             System.out.println("送信完了");
+             System.out.println("データの取得が完了しました");
+             
          } catch (SQLException e) {
              e.printStackTrace();
              // エラーハンドリング
@@ -41,29 +45,3 @@ public class DashboardServlet extends HttpServlet {
          }
      }
  }
-//    	try {
-//    	            // サイトを知ったかの集計結果を取得
-//    	            Map<String, Integer> referralCounts = DashboardDAO.getReferralCounts();
-//    	            request.setAttribute("referralCounts", referralCounts);
-
-    	            // 商品の購入回数の集計結果を取得
-//    	            Map<String, Map<Long, Integer>> purchaseCounts = DashboardDAO.getpurchaseCounts();
-//    	            request.setAttribute("purchaseCounts", purchaseCounts);
-//
-//    	            // 商品がどの地域で購入されているかの集計結果を取得
-//    	            Map<String, Map<Long, Integer>> regionCounts = DashboardDAO.getregionCounts();
-//    	            request.setAttribute("regionCounts", regionCounts);
-//    	            
-    	       
-
-//    	            // ダッシュボードのJSPにフォワード
-//    	           request.getRequestDispatcher("/adminmanagement.jsp").forward(request, response);
-//    	           System.out.println("送信完了");
-//    	        } catch (SQLException e) {
-//    	            e.printStackTrace();
-//    	            // エラーハンドリング
-//    	            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-//    	        }
-//    	}
-//    }
-	
