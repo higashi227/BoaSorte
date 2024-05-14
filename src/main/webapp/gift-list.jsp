@@ -11,53 +11,75 @@
 <body>
     <jsp:include page="header.jsp" />
     <main>
+    <div class="main-container">
         <h2>ギフト一覧</h2>
-        <table border="1">
-            <tr>
-                <th style="display: none;">ギフトID</th>
-                <th>名前</th>
-                <th>郵便番号</th>
-                <th>住所</th>
-                <th>操作</th>
-            </tr>
-            <c:forEach var="gift" items="${gifts}">
-                <tr>
-                    <td style="display: none;">${gift.giftId}</td>
-                    <td>${gift.gname}</td>
-                    <td>${gift.gpostnum}</td>
-                    <td>${gift.gaddress}</td>
-                    <td>
-                        <form id="editForm${gift.giftId}" method="GET" onsubmit="return false;">
-                            <input type="hidden" name="giftId" value="${gift.giftId}" />
-                            <button type="button" onclick="showEditForm(${gift.giftId},'${gift.gname}','${gift.gpostnum}','${gift.gaddress}')">編集</button>
-                        </form>
-                        <form action="delete-gift" method="POST" onsubmit="return confirm('このギフトを削除しますか？');">
-                            <input type="hidden" name="giftId" value="${gift.giftId}" />
-                            <button type="submit">削除</button>
-                        </form>
-                    </td>
-                </tr>
-            </c:forEach>
-        </table>     
-        <form action="gift-register.jsp">
-            <button type="submit">ギフト登録</button>
-        </form>
+        <div class="btncenter">
+	        <table border="1">
+	            <tr>
+	                <th style="display: none;">ギフトID</th>
+	                <th>名前</th>
+	                <th>郵便番号</th>
+	                <th>住所</th>
+	                <th>操作</th>
+	            </tr>
+	            <c:forEach var="gift" items="${gifts}">
+	                <tr>
+	                    <td style="display: none;">${gift.giftId}</td>
+	                    <td>${gift.gname}</td>
+	                    <td>${gift.gpostnum}</td>
+	                    <td>${gift.gaddress}</td>
+	                    <td>
+	                    	<div class="btnyoko">
+	                        <form id="editForm${gift.giftId}" method="GET" onsubmit="return false;">
+	                            <input type="hidden" name="giftId" value="${gift.giftId}" />
+	                            <button type="button" class="btn2" onclick="showEditForm(${gift.giftId},'${gift.gname}','${gift.gpostnum}','${gift.gaddress}')">編集</button>
+	                        </form>
+	                        <form action="delete-gift" method="POST" onsubmit="return confirm('このギフトを削除しますか？');">
+	                            <input type="hidden" name="giftId" value="${gift.giftId}" />
+	                            <button type="submit" class="btn1">削除</button>
+	                        </form>
+	                        </div>
+	                    </td>
+	                </tr>
+	            </c:forEach>
+	        </table>
+        </div>
+	        <div class="btncenter">
+		        <form action="gift-register.jsp">
+		            <button type="submit" class="btn1">ギフト登録</button>
+		        </form>
+	        </div>
+        </div>
     </main>
 
     <!-- 編集フォーム -->
     <div id="editFormContainer" style="display: none;">
-        <h2>ギフト編集</h2>
-        <form id="editGiftForm" method="POST" action="edit-gift">
-            <input type="hidden" id="editGiftId" name="giftId" value="" />
-            <label for="editGiftName">名前:</label>
-            <input type="text" id="editGiftName" name="gname" required><br><br>
-            <label for="editGiftPostnum">郵便番号:</label>
-            <input type="text" id="editGiftPostnum" name="gpostnum" required><br><br>
-            <label for="editGiftAddress">住所:</label>
-            <input type="text" id="editGiftAddress" name="gaddress" required><br><br>
-            <button type="submit">更新</button>
-            <button type="button" onclick="hideEditForm()">キャンセル</button>
-        </form>
+    	<div class="main-container">
+			<h2>ギフト編集</h2>
+	        <form id="editGiftForm" method="POST" action="edit-gift">
+	            <input type="hidden" id="editGiftId" name="giftId" value="" />
+	            <dl>
+		            <dt><label for="editGiftName">名前</label></dt>
+		            <dd><input type="text" id="editGiftName" name="gname" required></dd>
+	            </dl>
+	            
+	            <dl>
+		            <dt><label for="editGiftPostnum">郵便番号</label></dt>
+		            <dd><input type="text" id="editGiftPostnum" name="gpostnum" required></dd>
+	            </dl>
+	            
+	            <dl>
+		            <dt><label for="editGiftAddress">住所</label></dt>
+		            <dd><input type="text" id="editGiftAddress" name="gaddress" class="inpw" required></dd>
+	            </dl>
+	            
+	            <dic class="btncenter">
+	            <button type="submit" class="btn1">更新</button>
+	            &nbsp;
+	            <button type="button" onclick="hideEditForm()" class="btn2">キャンセル</button>
+	            </div>
+	        </form>
+        </div>
     </div>
 
     <!-- JavaScript -->

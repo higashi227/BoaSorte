@@ -3,11 +3,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!-- Include the necessary JSP files -->
-<div class="main-content">
+<div class="main-content main-container">
 	<div class="all-items-top">
     	<h2>All Items</h2>
     	<form action="MinServlet">
-			<input type="submit" value="購入はこちらから" />
+			<input type="submit" class="btn1" value="購入はこちらから" />
 		</form>
 	</div>
 	
