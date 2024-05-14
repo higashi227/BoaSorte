@@ -78,6 +78,7 @@
         </tbody>
     </table>
     <form action="PurchaseServlet" method="post" class="form-inline">
+    	<input type="hidden" name="tax" value="${tax}">
         <input type="submit" value="購入手続き" class="button-inline">
     </form>
     <form action="MinServlet">
