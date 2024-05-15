@@ -81,7 +81,7 @@
 			type="submit" value="ログアウト">
 	</form>
 
-<form action="AdminUserServlet" method="post">
+<form action="AdminUserServlet" method="get">
 		<input type="hidden" name="search" value="true"> <input
 			type="submit" value="検索">
 	</form>
@@ -182,6 +182,7 @@
             }
         }
     %>
+
 
 
 	var ctx = document.getElementById('mychart-region').getContext('2d');
