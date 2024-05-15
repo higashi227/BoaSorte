@@ -56,6 +56,7 @@
             </tbody>
         </table>
 		<p>配送日: <strong>${deliveryDate}</strong></p>
+		<p>配送時間帯: <strong>${deliveryTime}</strong></p>
 		<p>支払い方法: <strong>${paymentMethod}</strong></p>
 		 <p><strong>選択された配送先情報:</strong> ${selectedAddress}</p>
 		<form action="FinalizePurchaseServlet" method="post">
@@ -75,6 +76,7 @@
             </c:forEach>
             <input type="hidden" name="shippingFee" value="${shippingFee}">
             <input type="hidden" name="deliveryDate" value="${deliveryDate}">
+              <input type="hidden" name="deliveryTime" value="${deliveryTime}">
             <input type="hidden" name="paymentMethod" value="${paymentMethod}">
 
             <input type="submit" value="購入確定" class="button-inline">
