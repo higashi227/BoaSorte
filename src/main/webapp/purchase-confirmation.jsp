@@ -93,9 +93,10 @@
 					<input type="hidden" name="paymentMethod" value="${paymentMethod}"><br>
 					<div class="btnyoko">
 						<input type="submit" value="購入確定" class="btn1">&nbsp;
-						<button class="btn2" onclick="window.location.href='./PurchaseServlet';">戻る</button>
+						<button class="btn2" onclick="window.history.back();">戻る</button>
 					</div>
 				</form>
+				
 			</div>
 		</div>
 	</main>

@@ -14,7 +14,6 @@
         <form action="update-account" method="post">
             <c:forEach var="account" items="${accounts}">
             	<h2>ユーザー編集</h2>
-                <div class="center-block">
 	                <input type="hidden" name="accountId" value="${account.account_id}" />
 	                
 	                <dl>
@@ -46,7 +45,6 @@
 		                <dt><label for="ok_dm">ダイレクトメッセージ</label></dt>
 		                <dd><input type="checkbox" id="ok_dm" name="ok_dm" value="1" ${account.ok_dm == '1' ? 'checked' : ''} />受け取る</dd>
 	                </dl>
-                </div>
                 <div class="btncenter">
                 	<input type="submit" class="btn1" value="編集" />
                 	&nbsp;
