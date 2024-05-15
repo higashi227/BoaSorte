@@ -9,7 +9,7 @@
 	<jsp:include page="header.jsp" />
 	<main>
 		<div class="main-container">
-			<h2>アカウント登録結果</h2>
+			<h2>ユーザー登録結果</h2>
 			<p class="center">${message}</p>
 			<p class="center"><button onclick="window.location.href='./index.jsp'" class="btn2">戻る</button></p>
 		</div>

@@ -11,7 +11,7 @@
 	<main>
 	<div class="main-container">
     	<form action="register" method="post" class="h-adr">
-        	<h2>会員登録</h2>
+        	<h2>ユーザー登録</h2>
         
 	        <dl>
 		        <dt>名前</dt>
