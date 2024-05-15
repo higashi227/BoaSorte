@@ -22,6 +22,7 @@ public class PurchaseConfirmationServlet extends HttpServlet {
     	 int shippingFee = Integer.parseInt(request.getParameter("shippingFee"));
          int totalAmount = Integer.parseInt(request.getParameter("totalAmount"));
          String deliveryDate = request.getParameter("deliveryDate");
+         String deliveryTime = request.getParameter("deliveryTime");
          String paymentMethod = request.getParameter("paymentMethod");
         
 
@@ -50,10 +51,10 @@ public class PurchaseConfirmationServlet extends HttpServlet {
          System.out.println("Tax: " + tax); 
          request.setAttribute("cartItems", cartItems);
          request.setAttribute("tax", tax);
-       
          request.setAttribute("shippingFee", shippingFee);
          request.setAttribute("totalAmount", totalAmount);
          request.setAttribute("deliveryDate", deliveryDate);
+         request.setAttribute("deliveryTime", deliveryTime); 
          request.setAttribute("paymentMethod", paymentMethod);
          request.setAttribute("selectedAddress", selectedAddress);
 

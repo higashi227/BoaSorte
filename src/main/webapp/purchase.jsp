@@ -192,6 +192,13 @@
 		            <h3><label for="deliveryDate">配送日時</label></h3>
 		            <div class="center">
 		            	<input type="date" name="deliveryDate" id="deliveryDate" required><p>&nbsp;</p>
+		            <h3><label for="deliveryTime">配送時間帯:</label></h3>
+					<select name="deliveryTime" id="deliveryTime" required>
+    					<option value="9-12">9時から12時</option>
+    					<option value="14-16">14時から16時</option>
+    					<option value="16-19">16時から19時</option>
+    					<option value="19-21">19時から21時</option>
+					</select>
 		            </div>
 		            
 		            <div class="btncenter btnyoko">
