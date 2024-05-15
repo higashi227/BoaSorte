@@ -123,8 +123,8 @@
 		                </tr>
 		                <c:if test="${remainingForFreeShipping > 0}">
 		                    <tr>
-		                        <td colspan="4" style="text-align: right;"><strong>送料無料まで残り:</strong></td>
-		                        <td colspan="2"><strong>${remainingForFreeShipping}</strong></td>
+		                        <td colspan="4" class="right"><strong>送料無料まで残り</strong></td>
+		                        <td colspan="2" class="right"><strong>${remainingForFreeShipping}</strong></td>
 		                    </tr>
 		                </c:if>
 		            </tbody>
@@ -175,9 +175,11 @@
 		
 		            <!-- 支払い方法選択 -->
 		            <h3>支払い方法</h3>
-					<label><input type="radio" name="paymentMethod" value="クレジットカード" required> クレジットカード</label><br>
-					<label><input type="radio" name="paymentMethod" value="代引き"> 代引き</label><br>
-					<label><input type="radio" name="paymentMethod" value="銀行振込"> 銀行振込</label><br>
+		            <div class="center-block">
+						<label><input type="radio" name="paymentMethod" value="クレジットカード" required> クレジットカード</label><br>
+						<label><input type="radio" name="paymentMethod" value="代引き"> 代引き</label><br>
+						<label><input type="radio" name="paymentMethod" value="銀行振込"> 銀行振込</label><br>
+					</div>
 	
 		
 					<!-- 配送先アカウント情報の隠しフィールド -->

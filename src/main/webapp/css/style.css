@@ -36,6 +36,11 @@ header {
     z-index: 9999;
 }
 
+.center-block {
+    width: 50%;
+    margin: 0 auto;
+}
+
 header a {
     text-decoration: none;
     color: #fff;
@@ -103,20 +108,20 @@ main {
     border-left: solid 3px #7DA3A1;
     font-family: "BIZ UDGothic", sans-serif;
     margin-right: 30px;
-    display: inline-block; /* 横並びに配置 */
-    vertical-align: top; /* 垂直方向の配置を調整 */
+    display: inline-block;
+    vertical-align: top;
 }
 
 .main-container dl dd {
-    margin-left: 0; /* dd要素のマージンをリセット */
-    display: inline-block; /* 横並びに配置 */
-    vertical-align: top; /* 垂直方向の配置を調整 */
+    margin-left: 0;
+    display: inline-block; 
+    vertical-align: top;
 }
 
 .main-container dl{
 	margin-bottom: 1rem;
-	
 }
+
 .main-container dt {
 	padding-left: 10px;
 	width: 30%;
@@ -175,8 +180,8 @@ table tr:nth-child(odd) td {
 
 .btncenter {
 	display: flex;
- 	justify-content: center;
- 	padding-bottom: 0.5rem;
+	justify-content: center;
+	padding-bottom: 0.5rem;
 }
 
 .btnyoko {
