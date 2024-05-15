@@ -75,11 +75,16 @@
 	
 	<p>
 	
+	
 	<form action="AdminLogoutServlet" method="post">
-		<input type="hidden" name="edit" value="true"> <input
+		<input type="hidden" name="out" value="true"> <input
 			type="submit" value="ログアウト">
 	</form>
 
+<form action="AdminUserServlet" method="post">
+		<input type="hidden" name="search" value="true"> <input
+			type="submit" value="検索">
+	</form>
 
 	<%--サイトを知ったかの集計結果を円グラフで表示--%>
 	<div style="width: 300px">

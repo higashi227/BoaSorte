@@ -23,6 +23,10 @@
 		<input type="submit" value="保存">
 	</form>
 	
+	 <form action="ItemListServlet" method="get">
+        <input type="submit" value="戻る">
+    </form>
+	
 	
 
 </body>

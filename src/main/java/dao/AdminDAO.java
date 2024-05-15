@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import model.Account;
 import model.Login;
 import utils.DBUtil;
 
@@ -35,12 +38,38 @@ public class AdminDAO {
         }
         return status;
     }
+
+// ユーザー名でユーザー情報を検索するメソッド
+    public static List<Account> findUserByColumn(String columnName, String value) {
+        List<Account> users = new ArrayList<>();
+        try (Connection connection = DBUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM account WHERE " + columnName + " LIKE ?")) {
+            preparedStatement.setString(1, "%" + value + "%");
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Account user = new Account();
+                user.setAccountId(resultSet.getInt("account_id"));
+                user.setMailAddress(resultSet.getString("mail_address"));
+                user.setPassword(resultSet.getString("password"));
+                user.setName(resultSet.getString("name"));
+                user.setPostnum(resultSet.getString("postnum"));
+                user.setAddress(resultSet.getString("address"));
+                user.setBirthday(resultSet.getString("birthday"));
+                user.setTelephone(resultSet.getString("telephone"));
+               // user.setRecognition(resultSet.getString("recognition"));
+               // user.setOkDm(resultSet.getBoolean("ok_dm"));
+                //user.setCreatedAt(resultSet.getDate("created_at"));
+              //  user.setCreatedAt(resultSet.getDate("updated_at"));
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
 }
-
-
-
-
-
 
 
 
