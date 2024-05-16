@@ -13,6 +13,25 @@ public class Order {
     private String coffeeStatus;
     private Date createdAt;
     private Date updatedAt;
+    private String accountName;
+    private String itemName;
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
 
     public Order(int orderId, int accountId, int itemId, int quantity, int price, int postage, String coffeeStatus, Date createdAt, Date updatedAt) {
         this.orderId = orderId;
@@ -93,6 +112,8 @@ public class Order {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
+    
+    
 
     @Override
     public String toString() {
