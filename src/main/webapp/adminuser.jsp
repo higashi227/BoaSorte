@@ -72,7 +72,7 @@
 						<td><%=user.getTelephone()%></td>
 						<td>
 							<form action="UserDeleteServlet" method="post">
-								<input type="hidden" name="id" value="${user.getAccountId}">
+								<input type="hidden" name="id" value="<%=user.getAccountId()%>">
 								<input type="submit" value="削除" class="btn1">
 							</form>
 						</td>

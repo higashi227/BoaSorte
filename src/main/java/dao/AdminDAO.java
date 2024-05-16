@@ -100,37 +100,19 @@ public class AdminDAO {
 
 
 //商品を削除するメソッド
-		public static void deleteItem(int accountId) throws SQLException {
-		    Connection conn = null;
-		    PreparedStatement stmt = null;
+    public static boolean deleteUserById(int accountId) {
+        try (Connection connection = DBUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM account WHERE account_id = ?")) {
 
-		    try {
-		        conn = DBUtil.getConnection(); // DB接続
+            preparedStatement.setInt(1, accountId);
 
-		        // SQLクエリを定義
-		        String sql = "DELETE FROM boasorte.account WHERE account_id = ?";
-
-		        // ステートメントを作成
-		        stmt = conn.prepareStatement(sql);
-		        stmt.setInt(1, accountId);
-
-		        // クエリを実行
-		        stmt.executeUpdate();
-		    } catch (SQLException e) {
-		        e.printStackTrace();
-		        throw e; // SQLExceptionを再スローする
-		    } finally {
-		        // リソースの解放
-		        DBUtil.closeResources(conn, stmt, null);
-		    }
-		}
-
-
-
-		public static boolean deleteUserById(int accountId) {
-			// TODO 自動生成されたメソッド・スタブ
-			return false;
-		}
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0; // 削除が成功した場合はtrueを返す
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false; // 削除に失敗した場合はfalseを返す
+        }
+    }
 
 }
 
