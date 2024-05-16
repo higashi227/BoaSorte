@@ -97,17 +97,15 @@
 
 			</form>
 		</div>
-	</div>
-	</div>
-	<br>
-	<br>
-	<h3>【BoaSorteをどのようにして知ったか】</h3>
-	<%--サイトを知ったかの集計結果を円グラフで表示--%>
-	<div style="width: 300px">
-		<canvas id="mychart-referral"></canvas>
-	</div>
 
-	<script type="text/javascript">
+		<br> <br>
+		<h2>【BoaSorteをどのようにして知ったか】</h2>
+		<%--サイトを知ったかの集計結果を円グラフで表示--%>
+		<div style="width: 300px">
+			<canvas id="mychart-referral"></canvas>
+		</div>
+
+		<script type="text/javascript">
 		var recognition = [];
 		var count = [];
 		
@@ -135,15 +133,15 @@ if (referralCounts != null && !referralCounts.isEmpty()) {
 			},
 		});
 	</script>
-<br><br>
+		<br> <br>
 
-<h3>【各商品の購入回数】</h3>
-	<%--// 商品の購入回数の集計結果を円グラフで表示--%>
-	<div style="width: 300px">
-		<canvas id="mychart-purchase"></canvas>
-	</div>
+		<h2>【各商品の購入回数】</h2>
+		<%--// 商品の購入回数の集計結果を円グラフで表示--%>
+		<div style="width: 300px">
+			<canvas id="mychart-purchase"></canvas>
+		</div>
 
-	<script type="text/javascript">
+		<script type="text/javascript">
     var itemIds = [];
     var purchaseCounts = [];
     <%List<Object[]> purchaseCounts = (List<Object[]>) request.getAttribute("purchaseCounts");
@@ -169,38 +167,35 @@ if (purchaseCounts != null && !purchaseCounts.isEmpty()) {
 		});
 		
 	</script>
-<br><br>
-<h3>【商品ごとの購入地域割合】</h3>
-	<%--//商品の購入を地域別に積み重ね棒グラフで表示--%>
-	<div style="width: 300px">
-		<canvas id="mychart-region"></canvas>
+		<br> <br>
+		<h2>【商品ごとの購入地域割合】</h2>
+		<%--//商品の購入を地域別に積み重ね棒グラフで表示--%>
+		<div style="width: 300px">
+			<canvas id="mychart-region"></canvas>
+		</div>
 	</div>
-<script type="text/javascript">
+	<script type="text/javascript">
     var itemData = {};
     var regions = [];
-    <%
-        List<Object[]> regionCounts = (List<Object[]>) request.getAttribute("regionCounts");
-        if (regionCounts != null && !regionCounts.isEmpty()) {
-            for (Object[] data : regionCounts) {
-                long itemId = (long) data[0];
-                String region = (String) data[1];
-                int count = (int) data[2];
-    %>
+    <%List<Object[]> regionCounts = (List<Object[]>) request.getAttribute("regionCounts");
+if (regionCounts != null && !regionCounts.isEmpty()) {
+	for (Object[] data : regionCounts) {
+		long itemId = (long) data[0];
+		String region = (String) data[1];
+		int count = (int) data[2];%>
               <%--各data配列にitemId,region,countの値をいれる--%>
-                if (!itemData["<%= itemId %>"]) {
-                    itemData["<%= itemId %>"] = {};
+                if (!itemData["<%=itemId%>"]) {
+                    itemData["<%=itemId%>"] = {};
                 }
-                if (!itemData["<%= itemId %>"]["<%= region.replaceAll("\"", "\\\"") %>"]) {
-                    itemData["<%= itemId %>"]["<%= region.replaceAll("\"", "\\\"") %>"] = 0;
+                if (!itemData["<%=itemId%>"]["<%=region.replaceAll("\"", "\\\"")%>"]) {
+                    itemData["<%=itemId%>"]["<%=region.replaceAll("\"", "\\\"")%>"] = 0;
                 }
-                itemData["<%= itemId %>"]["<%= region.replaceAll("\"", "\\\"") %>"] += <%= count %>;
-                if (!regions.includes("<%= region.replaceAll("\"", "\\\"") %>")) {
-                    regions.push("<%= region.replaceAll("\"", "\\\"") %>");
+                itemData["<%=itemId%>"]["<%=region.replaceAll("\"", "\\\"")%>"] += <%=count%>;
+                if (!regions.includes("<%=region.replaceAll("\"", "\\\"")%>")) {
+                    regions.push("<%=region.replaceAll("\"", "\\\"")%>");
                 }
-    <%
-            }
-        }
-    %>
+    <%}
+}%>
 
     // 配列の色を生成する関数
     function getRandomColor() {//ランダムな１６進カラーコードを生成
