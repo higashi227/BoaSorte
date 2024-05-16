@@ -39,12 +39,15 @@ public class AdminDAO {
         return status;
     }
 
-// ユーザー名でユーザー情報を検索するメソッド
-    public static List<Account> findUserByColumn(String columnName, String value) {
+    
+    
+    //すべてのユーザー情報を取得
+    public static List<Account> getAllUsers() {
+    	
         List<Account> users = new ArrayList<>();
+        
         try (Connection connection = DBUtil.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM account WHERE " + columnName + " LIKE ?")) {
-            preparedStatement.setString(1, "%" + value + "%");
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM account")) {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -57,10 +60,7 @@ public class AdminDAO {
                 user.setAddress(resultSet.getString("address"));
                 user.setBirthday(resultSet.getString("birthday"));
                 user.setTelephone(resultSet.getString("telephone"));
-               // user.setRecognition(resultSet.getString("recognition"));
-               // user.setOkDm(resultSet.getBoolean("ok_dm"));
-                //user.setCreatedAt(resultSet.getDate("created_at"));
-              //  user.setCreatedAt(resultSet.getDate("updated_at"));
+                
                 users.add(user);
             }
         } catch (SQLException e) {
@@ -69,7 +69,36 @@ public class AdminDAO {
         return users;
     }
 
+// ユーザー名でユーザー情報を検索するメソッド
+    public static List<Account> findUserByName(String name) {
+    	
+        List<Account> users = new ArrayList<>();
+        
+        try (Connection connection = DBUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM account WHERE name LIKE ?")) {
+            preparedStatement.setString(1, "%" + name + "%");
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Account user = new Account();
+                user.setAccountId(resultSet.getInt("account_id"));
+                user.setMailAddress(resultSet.getString("mail_address"));
+                user.setPassword(resultSet.getString("password"));
+                user.setName(resultSet.getString("name"));
+                user.setPostnum(resultSet.getString("postnum"));
+                user.setAddress(resultSet.getString("address"));
+                user.setBirthday(resultSet.getString("birthday"));
+                user.setTelephone(resultSet.getString("telephone"));
+                
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
 }
+
 
 
 

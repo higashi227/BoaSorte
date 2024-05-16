@@ -39,6 +39,7 @@
 				<th scope="auto">電話番号</th>
 			</tr>
 		</thead>
+	
 		<tbody>
 			<%
 			List<Account> userList = (List<Account>) request.getAttribute("userList");
@@ -54,9 +55,7 @@
 				<td><%=user.getAddress()%></td>
 				<td><%=user.getBirthday()%></td>
 				<td><%=user.getTelephone()%></td>
-				<%-- <td><%=user.getRecognition()%></td>
-				<td><%=user.isOkDm() ? "はい" : "いいえ"%></td>
-				<td><%=user.getCreatedAt()%></td>--%>
+				
 			</tr>
 			<%
 			}
@@ -70,6 +69,47 @@
 			%>
 		</tbody>
 	</table>
+	
+	<div class="center btnyoko">
+        <!-- 検索ボタン -->
+        <button onclick="toggleSearch()" class="btn2">検索</button>
+        <p>&nbsp;</p>
+        <!-- 検索バー -->
+        <div id="searchBar" style="display: none;">
+            <input type="text" id="searchInput" oninput="searchUsers()" placeholder="ユーザーを検索...">
+        </div>
+    </div>
+	
+	<form action="ItemListServlet" method="get">
+        <input type="submit" value="戻る">
+    </form>
+    
+    
+    <script>
+        function toggleSearch() {
+            var searchBar = document.getElementById("searchBar");
+            searchBar.style.display = searchBar.style.display === "none" ? "block" : "none";
+        }
+
+        function searchUsers() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementsByTagName("table")[0];
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[3]; // Index 3 corresponds to the name column
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
 
 
 </body>
