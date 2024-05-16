@@ -26,43 +26,43 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@next/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 	<div class="main-container">
-	<h2>商品管理</h2>
-	<div class="btncenter">
-		<table border="1">
-			
-			<thead>
-				<tr>
-					<th scope="auto">品番</th>
-					<th scope="auto">商品名</th>
-					<th scope="auto">金額</th>
-					<th scope="auto">商品内容</th>
-				</tr>
-			</thead>
-			<tbody>
-				<%
-				List<Item> itemList = (List<Item>) request.getAttribute("itemList");
-				if (itemList != null && !itemList.isEmpty()) {
-					for (Item item : itemList) {
-				%>
-				<tr>
-					<td class="right"><%=item.getItemId()%></td>
-					<td><%=item.getName()%></td>
-					<td class="right"><%=item.getPrice()%></td>
-					<td><%=item.getIsCoffee() == 1 ? "コーヒー" : "お菓子"%></td>
+		<h2>商品管理</h2>
+		<div class="btncenter">
+			<table border="1">
 
-				</tr>
-				<%
-				}
-				} else {
-				%>
-				<tr>
-					<td colspan="4">商品情報がありません</td>
-				</tr>
-				<%
-				}
-				%>
-			</tbody>
-		</table>
+				<thead>
+					<tr>
+						<th scope="auto">品番</th>
+						<th scope="auto">商品名</th>
+						<th scope="auto">金額</th>
+						<th scope="auto">商品内容</th>
+					</tr>
+				</thead>
+				<tbody>
+					<%
+					List<Item> itemList = (List<Item>) request.getAttribute("itemList");
+					if (itemList != null && !itemList.isEmpty()) {
+						for (Item item : itemList) {
+					%>
+					<tr>
+						<td class="right"><%=item.getItemId()%></td>
+						<td><%=item.getName()%></td>
+						<td class="right"><%=item.getPrice()%></td>
+						<td><%=item.getIsCoffee() == 1 ? "コーヒー" : "お菓子"%></td>
+
+					</tr>
+					<%
+					}
+					} else {
+					%>
+					<tr>
+						<td colspan="4">商品情報がありません</td>
+					</tr>
+					<%
+					}
+					%>
+				</tbody>
+			</table>
 		</div>
 		<div class="btnyoko btncenter">
 			<form action="AdminItemNewServlet" method="post">
@@ -73,18 +73,26 @@
 			<form action="AdminItemEditServlet" method="post">
 				<input type="hidden" name="edit" value="true"> <input
 					type="submit" value="商品編集・削除" class="btn1">
-			</form>&nbsp;
-						<form action="AdminUserServlet" method="get">
+			</form>
+			&nbsp;
+			<form action="AdminUserServlet" method="get">
 				<input type="hidden" name="search" value="true"> <input
-					type="submit" value="ユーザー検索" class="btn1"></form>
+					type="submit" value="ユーザー検索" class="btn1">
+			</form>
+			&nbsp;
+			<form action="order-history" method="GET">
+				<button type="submit" class="btn1">注文履歴</button>
+			</form>
+
+
 		</div>
 		<div class="btnyoko">
 
 
-				<form action="AdminLogoutServlet" method="post">
-					<input type="hidden" name="out" value="true"> <input
-						type="submit" value="ログアウト" class="btn2">
-				</form>
+			<form action="AdminLogoutServlet" method="post">
+				<input type="hidden" name="out" value="true"> <input
+					type="submit" value="ログアウト" class="btn2">
+			</form>
 
 
 			</form>
