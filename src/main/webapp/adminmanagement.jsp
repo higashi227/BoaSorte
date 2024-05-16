@@ -91,6 +91,9 @@
 		</div>
 	</div>
 	</div>
+	<br>
+	<br>
+	<h3>【BoaSorteをどのようにして知ったか】</h3>
 	<%--サイトを知ったかの集計結果を円グラフで表示--%>
 	<div style="width: 300px">
 		<canvas id="mychart-referral"></canvas>
@@ -124,7 +127,9 @@ if (referralCounts != null && !referralCounts.isEmpty()) {
 			},
 		});
 	</script>
+<br><br>
 
+<h3>【各商品の購入回数】</h3>
 	<%--// 商品の購入回数の集計結果を円グラフで表示--%>
 	<div style="width: 300px">
 		<canvas id="mychart-purchase"></canvas>
@@ -156,15 +161,97 @@ if (purchaseCounts != null && !purchaseCounts.isEmpty()) {
 		});
 		
 	</script>
-
-	<%--//商品の購入を地域別に円グラフで表示--%>
-
+<br><br>
+<h3>【商品ごとの購入地域割合】</h3>
+	<%--//商品の購入を地域別に積み重ね棒グラフで表示--%>
 	<div style="width: 300px">
 		<canvas id="mychart-region"></canvas>
 	</div>
+<script type="text/javascript">
+    var itemData = {};
+    var regions = [];
+    <%
+        List<Object[]> regionCounts = (List<Object[]>) request.getAttribute("regionCounts");
+        if (regionCounts != null && !regionCounts.isEmpty()) {
+            for (Object[] data : regionCounts) {
+                long itemId = (long) data[0];
+                String region = (String) data[1];
+                int count = (int) data[2];
+    %>
+              <%--各data配列にitemId,region,countの値をいれる--%>
+                if (!itemData["<%= itemId %>"]) {
+                    itemData["<%= itemId %>"] = {};
+                }
+                if (!itemData["<%= itemId %>"]["<%= region.replaceAll("\"", "\\\"") %>"]) {
+                    itemData["<%= itemId %>"]["<%= region.replaceAll("\"", "\\\"") %>"] = 0;
+                }
+                itemData["<%= itemId %>"]["<%= region.replaceAll("\"", "\\\"") %>"] += <%= count %>;
+                if (!regions.includes("<%= region.replaceAll("\"", "\\\"") %>")) {
+                    regions.push("<%= region.replaceAll("\"", "\\\"") %>");
+                }
+    <%
+            }
+        }
+    %>
+
+    // 配列の色を生成する関数
+    function getRandomColor() {//ランダムな１６進カラーコードを生成
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    var datasets = [];
+    var colors = {}; // 地域ごとの色を格納するオブジェクト
+
+    regions.forEach((region) => {
+        colors[region] = getRandomColor(); // 地域ごとに色を生成
+    });
+
+    regions.forEach((region) => {
+        var data = [];
+        for (var itemId in itemData) {
+            if (itemData[itemId][region]) {
+                data.push(itemData[itemId][region]);
+            } else {
+                data.push(0);
+            }
+        }
+        datasets.push({
+            label: region,
+            data: data,
+            backgroundColor: colors[region],
+        });
+    });
+
+    var itemIds = Object.keys(itemData);
+
+    var ctx = document.getElementById('mychart-region').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: itemIds.map(itemId => 'Item ' + itemId), // 商品IDをラベルとして設定
+            datasets: datasets,
+        },
+        options: {
+            scales: {
+                x: {
+                    stacked: true,
+                },
+                y: {
+                    stacked: true,
+                },
+            },
+        },
+    });
+</script>
 
 
-	<script type="text/javascript">
+
+	<%-- <script type="text/javascript">
         var itemId = [];
         var regions = [];
         var purchaseCount = [];
@@ -196,7 +283,7 @@ if (regionCounts != null && !regionCounts.isEmpty()) {
 						} ],
 					},
 				});
-	</script>
+	</script>--%>
 
 </body>
 </html>
