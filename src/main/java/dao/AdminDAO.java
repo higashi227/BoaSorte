@@ -97,8 +97,42 @@ public class AdminDAO {
         }
         return users;
     }
-}
 
+
+//商品を削除するメソッド
+		public static void deleteItem(int accountId) throws SQLException {
+		    Connection conn = null;
+		    PreparedStatement stmt = null;
+
+		    try {
+		        conn = DBUtil.getConnection(); // DB接続
+
+		        // SQLクエリを定義
+		        String sql = "DELETE FROM boasorte.account WHERE account_id = ?";
+
+		        // ステートメントを作成
+		        stmt = conn.prepareStatement(sql);
+		        stmt.setInt(1, accountId);
+
+		        // クエリを実行
+		        stmt.executeUpdate();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		        throw e; // SQLExceptionを再スローする
+		    } finally {
+		        // リソースの解放
+		        DBUtil.closeResources(conn, stmt, null);
+		    }
+		}
+
+
+
+		public static boolean deleteUserById(int accountId) {
+			// TODO 自動生成されたメソッド・スタブ
+			return false;
+		}
+
+}
 
 
 
