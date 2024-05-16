@@ -176,8 +176,7 @@ if (regionCounts != null && !regionCounts.isEmpty()) {
 		String region = (String) data[1];
 		int count = (int) data[2];%>
                 itemIds.push("<%=itemId%>");
-                regions.push("<%=region.replaceAll("\"", "\\\"")%>
-		");
+                regions.push("<%=region.replaceAll("\"", "\\\"")%>");
 		purchaseCounts.push(
 	<%=count%>
 		);
