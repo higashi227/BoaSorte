@@ -51,6 +51,7 @@
 						<th scope="auto">住所</th>
 						<th scope="auto">生年月日</th>
 						<th scope="auto">電話番号</th>
+						<th scope="auto"></th>
 					</tr>
 				</thead>
 
@@ -69,6 +70,12 @@
 						<td><%=user.getAddress()%></td>
 						<td><%=user.getBirthday()%></td>
 						<td><%=user.getTelephone()%></td>
+						<td>
+							<form action="UserDeleteServlet" method="post">
+								<input type="hidden" name="id" value="${user.AccountId}">
+								<input type="submit" value="削除" class="btn1">
+							</form>
+						</td>
 
 					</tr>
 					<%
@@ -76,7 +83,7 @@
 					} else {
 					%>
 					<tr>
-						<td colspan="11">該当するユーザーが見つかりませんでした。</td>
+						<td colspan="12">該当するユーザーが見つかりませんでした。</td>
 					</tr>
 					<%
 					}
